@@ -1,0 +1,48 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #EBF5FF;
+    padding: 20px;
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #ffffff;
+        border-radius: 16px;
+        width: 100%;
+
+        .navbarRight {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px;
+
+            img {
+                border-radius: 40px;
+            }
+        }
+    }
+
+    .bottomBar {
+        display: flex;
+        gap: 20px;
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 20%;
+            height: 65vh;
+            border-radius: 16px;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .mainContainer {
+            width: 80%;
+            border-radius: 16px;
+        }
+    }
+}

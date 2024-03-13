@@ -1,0 +1,26 @@
+.leaveFormModal {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 16px;
+    width: 100%;
+
+    .leaveRequestForm {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .leaveFormInputArea {
+            background-color: #9a9a9a;
+            border-radius: 16px;
+            padding: 10px;
+            border: none;
+            color: black;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 16px;
+            border: none;
+        }
+    }
+}

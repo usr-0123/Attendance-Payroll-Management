@@ -1,0 +1,103 @@
+.employeeDashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .employeeDashboardTop {
+        display: flex;
+        gap: 10px;
+
+        .log {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 33%;
+            gap: 10px;
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 10px;
+
+            button {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: none;
+                color: #fff;
+                font-weight: 1000;
+            }
+
+            .timeStats {
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                font-weight: 1000;
+            }
+        }
+
+        .attendanceLog {
+            width: 66%;
+            border-radius: 16px;
+
+            .attendanceLogDate {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px;
+                background-color: #ffffff;
+                border-radius: 16px;
+                width: fit-content;
+                margin: 0 0 10px 0;
+            }
+
+            .employeeAttendance {
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 16px;
+
+                .employeeAttendanceReport {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding: 10px;
+
+                    .employeeAttendanceReportPage {
+                        display: flex;
+                        .employeeAttendanceReportDay {
+                            width: 20%;
+                        }
+
+                        .employeeAttendanceReportTimeStats {
+                            width: 80%;
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .employeeDashboardBottom {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 16px;
+        min-height: 20vh;
+
+        .employeeLeaveStats {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .employeeDashboardBottomModal {
+            button {
+                padding: 10px;
+                border-radius: 16px;
+                border: none;
+            }
+        }
+    }
+}
