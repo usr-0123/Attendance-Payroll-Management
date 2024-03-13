@@ -7,9 +7,13 @@ import { MdLogout } from "react-icons/md";
 import { IoMdHome } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
 
+// Employee components imports
 import EmployeeDashboard from '../components/Employee/employeeDashboard/EmployeeDashboard';
 import EmployeePayroll from '../components/Employee/employeePayroll/EmployeePayroll';
 import EmployeeProfile from '../pages/Profile/EmployeeProfilePage'
+
+// Admin components imports
+import ScheduleManagement from './admin/ScheduleManagement';
 
 import './Home.scss'
 
@@ -35,6 +39,7 @@ const Home = () => {
                 <Route path='/employeeDashboard' element = {< EmployeeDashboard/>}></Route>
                 <Route path='/employeePayroll' element = {< EmployeePayroll/>}></Route>
                 <Route path='/employeeProfile' element = {<EmployeeProfile />}></Route>
+                <Route path='/scheduleManagement' element = {<ScheduleManagement />}></Route>
             </Routes>
              
         </div>

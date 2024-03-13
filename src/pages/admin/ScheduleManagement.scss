@@ -1,0 +1,51 @@
+.scheduleManagement {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 16px;
+    background-color: #fff;
+
+    .scheduleManagementTop {
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+
+        span {
+            font-weight: bold;
+        }
+
+        button {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+            border-radius: 16px;
+            border: none;
+            font-weight: bold;
+            color: #fff;
+            background-color: #0083FF;
+        }
+    }
+
+    .scheduleManagementBody {
+        .scheduleManagementBodyHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .scheduleManagementBodyContent {
+            .scheduleManagementBodyContentList {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #F1F3FD;
+            border-radius: 16px;
+            }
+        }
+    }
+}
