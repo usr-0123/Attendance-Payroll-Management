@@ -14,6 +14,7 @@ import EmployeeProfile from '../pages/Profile/EmployeeProfilePage'
 
 // Admin components imports
 import ScheduleManagement from './admin/ScheduleManagement';
+import AdminDashboard from './admin/EmployeeManagement';
 
 import './Home.scss'
 
@@ -40,6 +41,7 @@ const Home = () => {
                 <Route path='/employeePayroll' element = {< EmployeePayroll/>}></Route>
                 <Route path='/employeeProfile' element = {<EmployeeProfile />}></Route>
                 <Route path='/scheduleManagement' element = {<ScheduleManagement />}></Route>
+                <Route path='/adminDashboard' element = {<AdminDashboard />}></Route>
             </Routes>
              
         </div>
