@@ -9,6 +9,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 
 import EmployeeDashboard from '../components/Employee/employeeDashboard/EmployeeDashboard';
 import EmployeePayroll from '../components/Employee/employeePayroll/EmployeePayroll';
+import EmployeeProfile from '../pages/Profile/EmployeeProfilePage'
 
 import './Home.scss'
 
@@ -22,20 +23,20 @@ const Home = () => {
             </div>
             <div className='navbarRight'>
                 <img src={Photo} alt="profile" height={80}/>
-                <MdLogout style={{fontSize: "50px"}}/>
+                <MdLogout style={{fontSize: "30px"}}/>
             </div>
         </div>
         <div className='bottomBar'>
         <div className="sidebar">
-            <div>
-                <NavLink to = '/EmployeePayroll' key='/EmployeePayroll'><IoMdHome /> Home</NavLink>
-                <NavLink to = '/EmployeePayroll' key='/EmployeePayroll' >Payroll</NavLink>
-            </div>
-            <div><FaRegUserCircle /> Profile</div>
+            Sidebar
         </div>
         <div className="mainContainer">
-                < EmployeeDashboard/>
-                < EmployeePayroll/>
+            <Routes>
+                <Route path='/employeeDashboard' element = {< EmployeeDashboard/>}></Route>
+                <Route path='/employeePayroll' element = {< EmployeePayroll/>}></Route>
+                <Route path='/employeeProfile' element = {<EmployeeProfile />}></Route>
+            </Routes>
+             
         </div>
         </div>
     </div>

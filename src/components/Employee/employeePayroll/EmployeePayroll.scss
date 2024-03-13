@@ -1,0 +1,85 @@
+.employeePayroll {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 16px;
+    padding: 10px;
+    background-color: #fff;
+
+    .employeePayrollIncome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #F1F3FD;
+        border-radius: 16px;
+
+        .employeePayrollGrossIncome {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .employeePayrollAdvance {
+        padding: 20px;
+        background-color: #F1F3FD;
+        border-radius: 16px;
+
+        .employeePayrollAdvanceTop {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0  10px 0;
+
+            button {
+                padding: 10px 30px 10px 30px;
+                color: #F1F3FD;
+                font-weight: bold;
+                background-color: #0083FF;
+                border-radius: 16px;
+                border: none;
+            }
+        }
+
+        .employeePayrollAdvanceList {
+            border-radius: 16px;
+            background-color: #fff;
+        }
+
+        .employeePayrollAdvanceNavbar, .employeePayrollAdvanceList {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+    }
+
+    .employeePayrollDeductions {
+        padding: 20px;
+        background-color: #F1F3FD;
+        border-radius: 16px;
+
+        .employeePayrollDeductionsList {
+            background-color: #fff;
+            border-radius: 16px;
+        }
+
+        .employeePayrollDeductionsNavbar, .employeePayrollDeductionsList {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        
+    }
+
+    .employeePayrollEarning {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        background-color: #F1F3FD;
+        border-radius: 16px;
+    }
+}

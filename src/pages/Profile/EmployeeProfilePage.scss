@@ -1,0 +1,134 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .profileMine {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: #fff;
+        border-radius: 16px;
+        padding: 10px;
+
+        .profileMineBottom {
+            display: flex;
+            gap: 20px;
+
+            .profileMineBottomImg {
+                img {
+                    border-radius: 50%;
+                }
+
+                button {
+                    display: flex;
+                    align-items: center;
+                    border: none;
+                    margin-top: -20%;
+                    border-radius: 50%;
+                    padding: 10px;
+                    font-size: 20px;
+                }
+            }
+
+            .profileMineBottomDetails {
+                width: 100%;
+
+                .profileMineBottomDetailsContainer {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                }
+
+                span {
+                    font-weight: bold;
+                }
+
+                .profileMineBottomDetailsNames {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    .profileInfo {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 16px;
+
+        .profileInfoTop {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            font-weight: bold;
+
+            button {
+                display: flex;
+                gap: 10px;
+                padding: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 16px;
+                background-color: #0083FF;
+                border: none;
+            }
+        }
+
+        .profileInfo {
+            display: flex;
+            align-items: center;
+
+            .profileInfoContainer {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 50%;
+            }
+
+            .profileInfoHeader {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .profileAddress {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 16px;
+
+        .profileAddressHeader {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            font-weight: bold;
+
+            button {
+                display: flex;
+                gap: 10px;
+                padding: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 16px;
+                background-color: #0083FF;
+                border: none;
+            }
+        }
+        .profileAddressMiddle, .profileAddressBottom {
+            display: flex;
+            padding: 10px;
+
+            .profileAddressMiddleContainer, .profileAddressBottomContainer {
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+                gap: 10px;
+
+                .profileAddressMiddleHeader, .profileAddressBottomHeader {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,9 @@
 import './EmployeeDashboard.scss'
 
+
 import LeaveRequestForm from './LeaveForm';
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { FaCalendarDay } from "react-icons/fa";
 
@@ -21,14 +22,38 @@ const EmployeeDashboard = () => {
 
     //Change check in button onClick
     const [isCheckedIn, setIsCheckedIn] = useState(false);
+    const [checkInTime, setCheckInTime] = useState(0);
+    const [elapsedTime, setElapsedTime] = useState(0);
 
+    // button color and text change
     const handleBtnChange = () => {
         setIsCheckedIn(!isCheckedIn);
+        if (!isCheckedIn) {
+            setCheckInTime(new Date());
+        }
     }
+
+    // record time in , time out, duration
+    useEffect(() => {
+        let interval;
+        if (isCheckedIn) {
+            interval = setInterval(() => {
+                setElapsedTime(prevElapsedTime => prevElapsedTime + 1);
+            }, 1000);
+        }
+
+        return () => clearInterval(interval);
+    }, [isCheckedIn]);
+
+    const formatTime = (timeInSeconds) => {
+        const hours = Math.floor(timeInSeconds / 3600);
+        const minutes = Math.floor((timeInSeconds % 3600) / 60);
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+    };
 
     // Display today's date
     const today = new Date();
-    const formattedDate = `${today.getFullYear()}-${(today.getMonth() +1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+    const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
     return (
         <div className="employeeDashboard">
@@ -39,9 +64,9 @@ const EmployeeDashboard = () => {
                         {isCheckedIn ? 'Check Out' : 'Check In'}
                     </button>
                     <div className='timeStats'>
-                        <div style={{color:"#2563EB"}}>9:00</div>
-                        <div style={{color:"#009733"}}>8:00</div>
-                        <div style={{color:"#ED4F9D"}}>17:00</div>
+                        <div style={{ color: '#2563EB' }}>{isCheckedIn && checkInTime && checkInTime.toLocaleString()}</div>
+                        <div style={{color:"#009733"}}>{formatTime(elapsedTime)}</div>
+                        <div style={{color:"#ED4F9D"}}>{!isCheckedIn && checkInTime && checkInTime.toLocaleString()}</div>
                     </div>
                 </div>
                 <div className='attendanceLog'>
@@ -62,9 +87,9 @@ const EmployeeDashboard = () => {
                             <li className='employeeAttendanceReportPage'>
                                 <div className='employeeAttendanceReportDay'>Today's date</div>
                                 <div className='employeeAttendanceReportTimeStats'>
-                                    <span>CheckIn Time</span>
+                                    <span>{isCheckedIn && checkInTime && checkInTime.toLocaleString()}</span>
                                     <span>CheckOut Time</span>
-                                    <span>Hours Worked</span>
+                                    <span>{formatTime(elapsedTime)}</span>
                                     <span>Overtime</span>
                                 </div>
                             </li>
@@ -73,7 +98,7 @@ const EmployeeDashboard = () => {
                                 <div className='employeeAttendanceReportTimeStats'>
                                     <span>CheckIn Time</span>
                                     <span>CheckOut Time</span>
-                                    <span>Hours Worked</span>
+                                    <span>{formatTime(elapsedTime)}</span>
                                     <span>Overtime</span>
                                 </div>
                             </li>
@@ -82,7 +107,7 @@ const EmployeeDashboard = () => {
                                 <div className='employeeAttendanceReportTimeStats'>
                                     <span>CheckIn Time</span>
                                     <span>CheckOut Time</span>
-                                    <span>Hours Worked</span>
+                                    <span>{formatTime(elapsedTime)}</span>
                                     <span>Overtime</span>
                                 </div>
                             </li>
@@ -91,7 +116,7 @@ const EmployeeDashboard = () => {
                                 <div className='employeeAttendanceReportTimeStats'>
                                     <span>CheckIn Time</span>
                                     <span>CheckOut Time</span>
-                                    <span>Hours Worked</span>
+                                    <span>{formatTime(elapsedTime)}</span>
                                     <span>Overtime</span>
                                 </div>
                             </li>
@@ -100,7 +125,7 @@ const EmployeeDashboard = () => {
                                 <div className='employeeAttendanceReportTimeStats'>
                                     <span>CheckIn Time</span>
                                     <span>CheckOut Time</span>
-                                    <span>Hours Worked</span>
+                                    <span>{formatTime(elapsedTime)}</span>
                                     <span>Overtime</span>
                                 </div>
                             </li>
@@ -114,9 +139,12 @@ const EmployeeDashboard = () => {
                 <span>Available Leave Requests</span>
                 21 Days
                 </div>
+                <div>
+                    {isModalOpen && <LeaveRequestForm onClose={closeModal} />}
+                </div>
                 <div className='employeeDashboardBottomModal'>
                     <button onClick={openModal}>Request Leave</button>
-                    {isModalOpen && <LeaveRequestForm onClose={closeModal} />}
+                    
                 </div>
             </div>
         </div>
