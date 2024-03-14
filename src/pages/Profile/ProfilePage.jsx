@@ -4,7 +4,7 @@ import './EmployeeProfilePage.scss'
 
 import { RiEdit2Fill } from "react-icons/ri";
 
-const EmployeeProfile = () => {
+const ProfilePage = () => {
     return (
         <div className="profile">
             <div className="profileMine">
@@ -108,4 +108,4 @@ const EmployeeProfile = () => {
     )
 }
 
-export default EmployeeProfile;
+export default ProfilePage;

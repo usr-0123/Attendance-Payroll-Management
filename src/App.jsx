@@ -2,8 +2,10 @@
 import Footer from './layouts/Footer'
 
 //Pages imports
-import Home from './pages/Home'
+import EmployeeHome from './pages/home/EmployeeHome'
+import AdminHome from './pages/home/AdminHome'
 import Login from './pages/login/Login'
+import ProfilePage from './pages/Profile/ProfilePage'
 
 // Stylesheet
 import './App.css'
@@ -17,8 +19,9 @@ function App() {
     <>
       <Routes>
         <Route path = "/" element = {< Login />}></Route>
-        {/* <Route path='/login' element = {< Login/>}></Route> */}
-        <Route path='/*' element = {< Home/>}></Route>
+        <Route path='*' element = {< AdminHome/>}></Route>
+        <Route path='/employeeHome/*' element = {< EmployeeHome/>}></Route>
+        {/* <Route path='/profilePage' element = {<ProfilePage />}></Route> */}
       </Routes>
 
       <div className='footer'>

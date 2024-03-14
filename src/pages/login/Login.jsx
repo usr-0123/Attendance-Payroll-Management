@@ -1,24 +1,64 @@
-// Import react
-import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Login.scss';
+import Logo from '../../assets/Logo.svg';
+import PrivacyPolicy from '../../components/login/PrivacyPolicy';
 
-// Import images
-import ProfileImg from '../../assets/alexander.jpg'
-
-// Stylesheet
-import './Login.scss'
-
-//import assets
-import Logo from '../../assets/Logo.svg'
-
-// import components
-import PrivacyPolicy from '../../components/PrivacyPolicy'
+import { FaUserAlt } from "react-icons/fa";
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleNavigate = () => {
-        navigate('/employeeDashboard')
+    const users = [
+        {
+            "id": "1",
+            "role": "Admin",
+            "first_name": "Lewis Kipngetich",
+            "last_name": "Kemboi",
+            "email": "lewis@luwi.ac.ke",
+            "password": "123456"
+        },
+        {
+            "id": "2",
+            "role": "employee",
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "jdoe@luwi.ac.ke",
+            "password": "123456"
+        },
+        {
+            "id": "3",
+            "role": "employee",
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "duck@luwi.ac.ke",
+            "password": "123456"
+        }
+    ];
+
+    const handleLogin = () => {
+
+        const user = users.find(user => user.email === email && user.password === password);
+
+        if (user) {
+            localStorage.setItem('loggedInUser', JSON.stringify({ email,password }));
+
+            if (user.role.toLowerCase() === 'admin') {
+                navigate('/adminHome');
+            } else if (user.role.toLowerCase() === 'employee') {
+                navigate('/employeeHome');
+            } else {
+                alert('You are not assigned any role, please contact the support center');
+            }
+        } else {
+            alert('Invalid email or password');
+        }
+    };
+
+    const forgotPassword = () => {
+        alert('Please contact the support center to reset your logins!')
     }
 
     return (
@@ -36,18 +76,18 @@ const Login = () => {
                 </div>
                 <div className='loginForm'>
                     <h1>LOGIN</h1>
-                    <img src={ProfileImg} alt="profile picture" height='100px' />
-                    <input type="email" placeholder='Enter your email address' />
-                    <input type="password" placeholder='Enter your password'/>
-                    <button onClick={handleNavigate}>Login</button>
-                    <span>Forgot password</span>
+                    <FaUserAlt style={{fontSize:"100px"}}/>
+                    <input type="email" placeholder='Enter your email address' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <button onClick={handleLogin}>Login</button>
+                    <span onClick={forgotPassword}>Forgot password</span>
                 </div>
                 <div className='resourcesConent'>
-                    < PrivacyPolicy/>
+                    {/* <PrivacyPolicy /> */}
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;

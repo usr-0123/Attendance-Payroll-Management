@@ -1,0 +1,15 @@
+[{
+    "id":"1",
+    "role":"Admin",
+    "first_name":"Lewis Kipngetich",
+    "last_name":"Kemboi",
+    "email":"lewis@luwi.ac.ke",
+    "password":"123456"
+},{
+    "id":"2",
+    "role":"employee",
+    "first_name":"John",
+    "last_name":"Doe",
+    "email":"jdoe@luwi.ac.ke",
+    "password":"123456"
+}]
