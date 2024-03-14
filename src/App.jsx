@@ -5,7 +5,6 @@ import Footer from './layouts/Footer'
 import EmployeeHome from './pages/home/EmployeeHome'
 import AdminHome from './pages/home/AdminHome'
 import Login from './pages/login/Login'
-import ProfilePage from './pages/Profile/ProfilePage'
 
 // Stylesheet
 import './App.css'
@@ -21,7 +20,6 @@ function App() {
         <Route path = "/" element = {< Login />}></Route>
         <Route path='*' element = {< AdminHome/>}></Route>
         <Route path='/employeeHome/*' element = {< EmployeeHome/>}></Route>
-        {/* <Route path='/profilePage' element = {<ProfilePage />}></Route> */}
       </Routes>
 
       <div className='footer'>

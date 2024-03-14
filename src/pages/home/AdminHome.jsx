@@ -8,8 +8,9 @@ import { MdLogout } from "react-icons/md";
 
 // Admin components imports
 import ScheduleManagement from '../admin/ScheduleManagement';
-import AdminDashboard from '../admin/EmployeeManagement';
 import AdminSidebar from '../../components/Admin/home/Sidebar';
+import AttendanceReport from '../admin/AttendanceReports';
+import FinancialManagement from '../admin/FinancialManagement'
 
 import './Home.scss'
 import EmployeeManagement from '../admin/EmployeeManagement';
@@ -49,6 +50,8 @@ const AdminHome = () => {
                 <Route path='/adminHome' element = {<ScheduleManagement />}></Route>
                 <Route path='/employeeManagement' element = {<EmployeeManagement />}></Route>
                 <Route path='/adminProfilePage' element = {<ProfilePage/>}></Route>
+                <Route path='/attendanceReport' element = {<AttendanceReport />}></Route>
+                <Route path='/financialManagement' element = {< FinancialManagement/>}></Route>
             </Routes>
              
         </div>
@@ -57,3 +60,4 @@ const AdminHome = () => {
     )
 }
 export default AdminHome;
+

@@ -1,0 +1,93 @@
+.AttendanceReportHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.AttendanceReport {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 16px;
+
+    .AttendanceReportTop {
+        display: flex;
+        gap: 10px;
+        border-radius: 16px;
+
+        .AttendanceReportTopEmployee {
+            background-color: #F1F3FD;
+            padding: 10px;
+            border-radius: 16px;
+            width: 100%;
+        }
+
+        .AttendanceReportTopMonthly {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #F1F3FD;
+            padding: 10px;
+            border-radius: 16px;
+            width: 35%;
+
+            .AttendanceReportTopMonthlyHeader {
+                font-weight: bold;
+            }
+
+            .AttendanceReportTopMonthlyTotal {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .AttendanceReportTopMonthlyTotalHeader {
+                    font-weight: bold;
+                }
+            }
+
+            .AttendanceReportTopMonthlyAttendance  {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .AttendanceReportTopMonthlyAttendanceHeader {
+                    font-weight: bold;
+                }
+            }
+
+            .AttendanceReportTopMonthlyLeave {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .AttendanceReportTopMonthlyLeaveHeader {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .AttendanceReportMiddle {
+        background-color: #F1F3FD;
+        padding: 10px;
+        border-radius: 16px;
+
+        .AttendanceReportMiddleHeader {
+            font-weight: bold;
+        }
+    }
+
+    .AttendanceReportBottom {
+        background-color: #F1F3FD;
+        padding: 10px;
+        border-radius: 16px;
+
+        .AttendanceReportBottomHeader {
+            font-weight: bold;
+        }
+    }
+}

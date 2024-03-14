@@ -22,7 +22,7 @@ const AdminSidebar = () => {
         {
             icon:<TbClipboardText />,
             name:"Attendance Reports",
-            path:""
+            path:"/attendanceReport"
         },
         {
             icon:<FaUsers />,
@@ -32,7 +32,7 @@ const AdminSidebar = () => {
         {
             icon:<CiBank />,
             name:"Financial Management",
-            path:""
+            path:"/financialManagement"
         }
     ]
 
