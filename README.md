@@ -8,6 +8,10 @@ The link below shows the figma design for this project:
 
 - [Project's figma link](https://www.figma.com/file/4XD91mTqllajWqbfuwOJYz/Attendance-and-Payroll-Management?type=design&node-id=6%3A422&mode=design&t=WSquCPDYVqEDaIwI-1)
 
+## Preview Link
+
+![Preview](/client/public/Preview.png)
+
 ## Icons
 The link below is for the react icons used
 
