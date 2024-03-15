@@ -1,0 +1,66 @@
+.financePayrollManagementTopper {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.financePayrollManagement, .financeOvertimeManagement {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 10px;
+
+
+    .financePayrollManagementHeader, .financeOvertimeManagementHeader {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            background-color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #0083FF;
+            font-weight: bold;
+            color: #fff;
+        }
+    }
+
+    .financePayrollManagementBody, .financeOvertimeManagementBody {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .financePayrollManagementBodyHeader, .financeOvertimeManagementBodyHeader {
+            display: flex;
+            justify-content: space-evenly;
+            // width: 100%;
+            // background-color: #837f7f;
+
+            span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 25%;
+            }
+        }
+
+        .financePayrollManagementBodyContent, .financeOvertimeManagementBodyContent {
+            display: flex;
+            justify-content: space-evenly;
+            background-color: #F1F3FD;
+            border-radius: 16px;
+            padding: 10px;
+
+            span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 25%;
+            }
+        }
+    }
+}
