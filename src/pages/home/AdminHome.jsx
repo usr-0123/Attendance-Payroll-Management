@@ -16,7 +16,7 @@ import './Home.scss'
 import EmployeeManagement from '../admin/EmployeeManagement';
 import ProfilePage from '../Profile/ProfilePage';
 
-const AdminHome = () => {
+const AdminHome = ({user}) => {
     const navigate = useNavigate();
     const handleLogout = () => {
         // clear local storage
@@ -30,12 +30,15 @@ const AdminHome = () => {
         console.log("I am clicked");
     }
 
+    // console.log(user);
+
     return (
     <div className='home'>
         <div className="navbar">
             <div className='navbarLeft'>
                 <img src={Logo} alt="logo" />
             </div>
+            <div>Hello</div>
             <div className='navbarRight'>
                 <img src={Photo} alt="profile" height={80}/>
                 <MdLogout style={{fontSize: "30px"}} onClick={handleLogout}/>

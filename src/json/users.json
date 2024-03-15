@@ -1,15 +1,41 @@
-[{
-    "id":"1",
-    "role":"Admin",
-    "first_name":"Lewis Kipngetich",
-    "last_name":"Kemboi",
-    "email":"lewis@luwi.ac.ke",
-    "password":"123456"
-},{
-    "id":"2",
-    "role":"employee",
-    "first_name":"John",
-    "last_name":"Doe",
-    "email":"jdoe@luwi.ac.ke",
-    "password":"123456"
-}]
+[
+    {
+        "First_name": "John",
+        "Last_name": "Doe",
+        "Email_address": "john.doe@example.com",
+        "Physical_address": "123 Main St",
+        "Contact_information": "123-456-7890",
+        "Gender": "Male",
+        "Role":"Admin",
+        "Birth_date":"1980-01-15",
+        "Department": "Engineering",
+        "Job_title": "Software Engineer",
+        "password": "123456"
+    },
+    {
+        "First_name": "Jane",
+        "Last_name": "Smith",
+        "Email_address": "jane.smith@example.com",
+        "Physical_address": "456 Elm St",
+        "Contact_information": "456-789-0123",
+        "Gender": "Female",
+        "Role":"employee",
+        "Birth_date":"1985-03-20",
+        "Department": "Marketing",
+        "Job_title": "Marketing Manager",
+        "password": "123456"
+    },
+    {
+        "First_name": "Michael",
+        "Last_name": "Johnson",
+        "Email_address": "michael.johnson@example.com",
+        "Physical_address": "789 Oak St",
+        "Contact_information": "456-789-0123",
+        "Gender": "Male",
+        "Role":"employee",
+        "Birth_date":"1985-03-20",
+        "Department": "Human Resource",
+        "Job_title": "Human Resource Assistance",
+        "password": "123456"
+    }
+]

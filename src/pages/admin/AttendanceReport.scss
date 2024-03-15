@@ -89,5 +89,36 @@
         .AttendanceReportBottomHeader {
             font-weight: bold;
         }
+
+        .AttendanceReportBottomNav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+
+            span {
+                display: flex;
+                justify-content: flex-start;
+                width: 50%;
+                font-weight: bold;
+            }
+        }
+
+        .AttendanceReportBottomHList {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 16px;
+            margin: 10px 0 10px 0;
+            // gap: 10px;
+
+            span {
+                display: flex;
+                justify-content: flex-start;
+                width: 25%;
+                padding: 0 10px 0 10px;
+            }
+        }
     }
 }

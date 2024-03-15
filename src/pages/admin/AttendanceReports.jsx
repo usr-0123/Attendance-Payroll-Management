@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 import './AttendanceReport.scss'
@@ -6,20 +6,38 @@ import './AttendanceReport.scss'
 const AttendanceReport = () => {
 
     const data = [
-        { name: 'Week 1', attendance: 70 },
+        { name: 'Week 1', attendance: 50 },
         { name: 'Week 2', attendance: 85 },
         { name: 'Week 3', attendance: 90 },
         { name: 'Week 4', attendance: 88 },
-      ];
+    ];
 
-      const departmentData = [
+    const departmentData = [
         { name: 'Admin', attendance: 20 },
         { name: 'H.R.', attendance: 85 },
         { name: 'Operations', attendance: 90 },
         { name: 'Services', attendance: 88 },
         { name: 'Sales', attendance: 88 },
         { name: 'Marketing', attendance: 88 },
-      ];
+    ];
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+          try {
+            const response = await fetch('/src/json/users.json');
+            const userData = await response.json();
+            setUsers(userData);
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+          }
+        };
+    
+        fetchUsers();
+      }, []);
+
+      console.log(users);
 
     return (
         <>
@@ -74,7 +92,22 @@ const AttendanceReport = () => {
             <div className='AttendanceReportBottom'>
                 <span className='AttendanceReportBottomHeader'>Employee Attendance</span>
                 <div>
-                    List
+                    <div className='AttendanceReportBottomNav'>
+                        <span>First Name</span>
+                        <span>Last Name</span>
+                        <span>Email</span>
+                        <span>Department</span>
+                    </div>
+                <ul>
+                    {users.map((user, index) => (
+                    <li key={index} className='AttendanceReportBottomHList'>
+                        <span>{user.First_name}</span>
+                        <span>{user.Last_name}</span>
+                        <span>{user.Email_address}</span>
+                        <span>{user.Department}</span>
+                    </li>
+                    ))}
+                </ul>
                 </div>
             </div>
         </div>

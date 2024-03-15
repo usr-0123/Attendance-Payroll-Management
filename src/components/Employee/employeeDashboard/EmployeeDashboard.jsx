@@ -11,6 +11,7 @@ const EmployeeDashboard = () => {
 
     //Request leave modal form
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [leaveRequests, setLeaveRequests] = useState([]);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -20,53 +21,88 @@ const EmployeeDashboard = () => {
         setIsModalOpen(false);
     };
 
-    //Change check in button onClick
-    const [isCheckedIn, setIsCheckedIn] = useState(false);
-    const [checkInTime, setCheckInTime] = useState(0);
-    const [elapsedTime, setElapsedTime] = useState(0);
-
-    // button color and text change
-    const handleBtnChange = () => {
-        setIsCheckedIn(!isCheckedIn);
-        if (!isCheckedIn) {
-            setCheckInTime(new Date());
-        }
-    }
-
-    // record time in , time out, duration
-    useEffect(() => {
-        let interval;
-        if (isCheckedIn) {
-            interval = setInterval(() => {
-                setElapsedTime(prevElapsedTime => prevElapsedTime + 1);
-            }, 1000);
-        }
-
-        return () => clearInterval(interval);
-    }, [isCheckedIn]);
-
-    const formatTime = (timeInSeconds) => {
-        const hours = Math.floor(timeInSeconds / 3600);
-        const minutes = Math.floor((timeInSeconds % 3600) / 60);
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
-    };
-
     // Display today's date
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+
+    // Record checkin and checkout times
+    const [firstClickTime, setFirstClickTime] = useState(null);
+    const [secondClickTime, setsecondClickTime] = useState(null);
+    const [isCheckedIn, setIsCheckedIn] = useState(false);
+    const [duration, setDuration] = useState(0);
+
+    const recordButtonClick = () => {
+        const currentTime = new Date();
+
+        if (!isCheckedIn) {
+            setFirstClickTime(currentTime);
+            console.log("First click record at:", currentTime);
+            setIsCheckedIn(true);
+
+        } else {
+            setsecondClickTime(currentTime);
+            console.log("Second click recorded at:", currentTime);
+            setIsCheckedIn(false);            
+        }
+    }
+
+    
+    // Calculate timeDifference
+    useEffect(() => {
+        if (secondClickTime !== null) {
+            const duration = secondClickTime.getTime() - firstClickTime.getTime();
+            setDuration(duration);
+            console.log("Time between checkin and check out is :", duration);
+        }
+    }, [secondClickTime, firstClickTime]);
+
+    // I need date from duration
+
+    const formatDuration = (duration) => {
+        const hours = Math.floor(duration / (1000 * 60 * 60));
+        const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((duration % (1000 * 60)) / 1000);
+        return `${hours} : ${minutes} : ${seconds}`;
+    };
+    
+    // Calculate the remaining overtime
+    const calculateOvertimeRemaining = (secondClickTime) => {
+        const defaultOvertimeDuration = 4 * 60 * 60;
+        const overtimeRemaining = secondClickTime.getTime() - defaultOvertimeDuration;
+        return overtimeRemaining;
+    };
+
+    // Fetch leave requests from local storage
+    useEffect(() => {
+        const savedLeaveRequests = localStorage.getItem('leaveRequests');
+        if (savedLeaveRequests) {
+            setLeaveRequests(JSON.parse(savedLeaveRequests));
+        }
+    }, []);
+
+    // Calculate total leave days
+    const totalLeaveDays = leaveRequests.reduce((total, request) => {
+        return total + request.numberOfDays;
+    }, 0);
+
+    // Check if total leave days is 21
+    const isLeaveLimitReached = totalLeaveDays >= 21;
+
+    // console.log(remainingLeaveDays);
+
 
     return (
         <div className="employeeDashboard">
             <div className="employeeDashboardTop">
                 <div className="log">
                     <span style={{fontWeight:"1000", fontSize:"30px"}}>{formattedDate}</span>
-                    <button onClick={handleBtnChange} style={{backgroundColor: isCheckedIn ? '#ED4F9D' : '#2563EB'}}>
+                    <button onClick={ recordButtonClick } style={{backgroundColor: isCheckedIn ? '#ED4F9D' : '#2563EB'}}>
                         {isCheckedIn ? 'Check Out' : 'Check In'}
                     </button>
                     <div className='timeStats'>
-                        <div style={{ color: '#2563EB' }}>{isCheckedIn && checkInTime && checkInTime.toLocaleString()}</div>
-                        <div style={{color:"#009733"}}>{formatTime(elapsedTime)}</div>
-                        <div style={{color:"#ED4F9D"}}>{!isCheckedIn && checkInTime && checkInTime.toLocaleString()}</div>
+                        <div style={{ color: '#2563EB' }}>{firstClickTime && <p>{firstClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</div>
+                        <div style={{color:"#009733"}}>{formatDuration(duration)}</div>
+                        <div style={{color:"#ED4F9D"}}>{secondClickTime && <p>{secondClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</div>
                     </div>
                 </div>
                 <div className='attendanceLog'>
@@ -87,46 +123,46 @@ const EmployeeDashboard = () => {
                             <li className='employeeAttendanceReportPage'>
                                 <div className='employeeAttendanceReportDay'>Today's date</div>
                                 <div className='employeeAttendanceReportTimeStats'>
-                                    <span>{isCheckedIn && checkInTime && checkInTime.toLocaleString()}</span>
-                                    <span>CheckOut Time</span>
-                                    <span>{formatTime(elapsedTime)}</span>
-                                    <span>Overtime</span>
+                                    <span>{firstClickTime && <p>{firstClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{secondClickTime && <p>{secondClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{formatDuration(duration)}</span>
+                                    <span>{calculateOvertimeRemaining}4:00</span>
                                 </div>
                             </li>
                             <li className='employeeAttendanceReportPage'>
                                 <div className='employeeAttendanceReportDay'>Today's date</div>
                                 <div className='employeeAttendanceReportTimeStats'>
-                                    <span>CheckIn Time</span>
-                                    <span>CheckOut Time</span>
-                                    <span>{formatTime(elapsedTime)}</span>
-                                    <span>Overtime</span>
+                                    <span>{firstClickTime && <p>{firstClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{secondClickTime && <p>{secondClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{formatDuration(duration)}</span>
+                                    <span>{calculateOvertimeRemaining}4:00</span>
                                 </div>
                             </li>
                             <li className='employeeAttendanceReportPage'>
                                 <div className='employeeAttendanceReportDay'>Today's date</div>
                                 <div className='employeeAttendanceReportTimeStats'>
-                                    <span>CheckIn Time</span>
-                                    <span>CheckOut Time</span>
-                                    <span>{formatTime(elapsedTime)}</span>
-                                    <span>Overtime</span>
+                                    <span>{firstClickTime && <p>{firstClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{secondClickTime && <p>{secondClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{formatDuration(duration)}</span>
+                                    <span>{calculateOvertimeRemaining}4:00</span>
                                 </div>
                             </li>
                             <li className='employeeAttendanceReportPage'>
                                 <div className='employeeAttendanceReportDay'>Today's date</div>
                                 <div className='employeeAttendanceReportTimeStats'>
-                                    <span>CheckIn Time</span>
-                                    <span>CheckOut Time</span>
-                                    <span>{formatTime(elapsedTime)}</span>
-                                    <span>Overtime</span>
+                                    <span>{firstClickTime && <p>{firstClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{secondClickTime && <p>{secondClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{formatDuration(duration)}</span>
+                                    <span>{calculateOvertimeRemaining}4:00</span>
                                 </div>
                             </li>
                             <li className='employeeAttendanceReportPage'>
                                 <div className='employeeAttendanceReportDay'>Today's date</div>
                                 <div className='employeeAttendanceReportTimeStats'>
-                                    <span>CheckIn Time</span>
-                                    <span>CheckOut Time</span>
-                                    <span>{formatTime(elapsedTime)}</span>
-                                    <span>Overtime</span>
+                                    <span>{firstClickTime && <p>{firstClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{secondClickTime && <p>{secondClickTime.toLocaleString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>}</span>
+                                    <span>{formatDuration(duration)}</span>
+                                    <span>{calculateOvertimeRemaining}4:00</span>
                                 </div>
                             </li>
                         </ul>
@@ -136,8 +172,8 @@ const EmployeeDashboard = () => {
             </div>
             <div className="employeeDashboardBottom">
                 <div className='employeeLeaveStats'>
-                <span>Available Leave Requests</span>
-                21 Days
+                <span className='employeeLeaveStatsHeader'>Available Leave Requests</span>
+                {isLeaveLimitReached ? 'Leave limit reached' : `${21 - totalLeaveDays} Days left`}
                 </div>
                 <div>
                     {isModalOpen && <LeaveRequestForm onClose={closeModal} />}

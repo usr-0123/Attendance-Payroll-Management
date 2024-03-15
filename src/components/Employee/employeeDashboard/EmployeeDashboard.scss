@@ -90,6 +90,10 @@
         .employeeLeaveStats {
             display: flex;
             flex-direction: column;
+
+            .employeeLeaveStatsHeader {
+                font-weight: bold;
+            }
         }
 
         .employeeDashboardBottomModal {

@@ -2,6 +2,9 @@ import { useNavigate ,NavLink } from "react-router-dom";
 
 import { IoHomeSharp } from "react-icons/io5";
 import { TbClipboardText } from "react-icons/tb";
+import { FaUserAlt } from "react-icons/fa";
+
+import './EmployeeSidebar.scss'
 
 const EmployeeSidebar = () => {
     const navigate = useNavigate();
@@ -23,15 +26,20 @@ const EmployeeSidebar = () => {
 
     return (
         <div className="sidenav">
+            <div>
             {adminSidebarItems && adminSidebarItems.map((item) => (
                 <NavLink to={item.path} className={({ isActive }) => isActive ? "menu-item active" : "menu-item"} key={item.path}>
-                    <div>
+                    <div className="sidenavItems">
                         {item.icon}
                         <p>{item.name}</p>
                     </div>
                 </NavLink>
             ))}
-            <div onClick={handleProfile}>Profile <br /> page</div>
+            </div>
+            <div className="employeeProfile" onClick={handleProfile}>
+            <FaUserAlt />
+            <span>Profile</span>
+            </div>
         </div>
     )
 }

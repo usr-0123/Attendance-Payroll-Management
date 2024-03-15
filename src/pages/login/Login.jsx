@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.scss';
 import Logo from '../../assets/Logo.svg';
@@ -10,42 +10,33 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [users, setUsers] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const users = [
-        {
-            "id": "1",
-            "role": "Admin",
-            "first_name": "Lewis Kipngetich",
-            "last_name": "Kemboi",
-            "email": "lewis@luwi.ac.ke",
-            "password": "123456"
-        },
-        {
-            "id": "2",
-            "role": "employee",
-            "first_name": "John",
-            "last_name": "Doe",
-            "email": "jdoe@luwi.ac.ke",
-            "password": "123456"
-        },
-        {
-            "id": "3",
-            "role": "employee",
-            "first_name": "John",
-            "last_name": "Doe",
-            "email": "duck@luwi.ac.ke",
-            "password": "123456"
-        }
-    ];
+    useEffect(() => {
+        // Fetch user details from JSON file
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('/src/json/users.json');
+                const data = await response.json();
+                setUsers(data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUsers();
+    }, []);
 
     const handleLogin = () => {
 
-        const user = users.find(user => user.email === email && user.password === password);
+        const user = users.find(user => user.Email_address === email && user.password === password);
 
         if (user) {
-            localStorage.setItem('loggedInUser', JSON.stringify({ email,password }));
+            localStorage.setItem('loggedInUser', JSON.stringify({user}));
+            setIsLoggedIn(true);
 
-            if (user.role.toLowerCase() === 'admin') {
+            if (user.Role.toLowerCase() === 'admin') {
                 navigate('/adminHome');
             } else if (user.role.toLowerCase() === 'employee') {
                 navigate('/employeeHome');
@@ -56,6 +47,8 @@ const Login = () => {
             alert('Invalid email or password');
         }
     };
+
+    console.log(users);
 
     const forgotPassword = () => {
         alert('Please contact the support center to reset your logins!')

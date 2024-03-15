@@ -1,3 +1,5 @@
+import React, {useEffect, useState} from 'react';
+
 import Profile from '../../assets/alexander.jpg'
 
 import './EmployeeProfilePage.scss'
@@ -5,6 +7,19 @@ import './EmployeeProfilePage.scss'
 import { RiEdit2Fill } from "react-icons/ri";
 
 const ProfilePage = () => {
+
+    //Fetching user details from  the local storage
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+
+        //Retrieve user details from the local storage
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        setUser(loggedInUser);
+    }, []);
+
+    console.log("This is the logged user details", user );
+
     return (
         <div className="profile">
             <div className="profileMine">
@@ -17,17 +32,17 @@ const ProfilePage = () => {
                     <div className="profileMineBottomDetails">
                     <div className='profileMineBottomDetailsNames'>
                         <div className='profileMineBottomDetailsContainer'>
-                        <span>F.Name</span>
-                        <span>Lewis Kipngetich</span>
+                        <span>First Name</span>
+                        {/* <span>{user.user.First_name}</span> */}
                         </div>
                         <div className='profileMineBottomDetailsContainer'>
                         <span>L.Name</span>
-                        <span>Kemboi</span>
+                        {/* <span>{user.user.Last_name}</span> */}
                         </div>
                     </div>
                     <div className='profileMineBottomDetailsContainer'>
                         <span>Job Position</span>
-                        <span>Chief Executive Officer</span>
+                        {/* <span>{user.user.Job_title}</span> */}
                     </div>
                     <div className='profileMineBottomDetailsContainer'>
                         <span>Work Schedule</span>
@@ -44,11 +59,11 @@ const ProfilePage = () => {
                 <div className="profileInfo">
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>First Name</span>
-                        <span>Lewis Kipngetich</span>
+                        {/* <span>{user.user.First_name}</span> */}
                     </div>
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>Last Name</span>
-                        <span>Kemboi</span>
+                        {/* <span>{user.user.Last_name}</span> */}
                     </div>
                 </div>
 
@@ -100,8 +115,6 @@ const ProfilePage = () => {
                     <span className='profileAddressBottomHeader'>Postal Code</span>
                     <span>5498-43314</span>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
