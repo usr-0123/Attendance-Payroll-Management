@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
-import Profile from '../../assets/alexander.jpg'
+import Profile from '../../../assets/alexander.jpg'
 
-import './EmployeeProfilePage.scss'
+import './AdminProfile.scss'
 
 import { RiEdit2Fill } from "react-icons/ri";
 

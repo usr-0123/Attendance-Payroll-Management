@@ -14,6 +14,7 @@ const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
+
         // Fetch user details from JSON file
         const fetchUsers = async () => {
             try {
@@ -38,7 +39,7 @@ const Login = () => {
 
             if (user.Role.toLowerCase() === 'admin') {
                 navigate('/adminHome');
-            } else if (user.role.toLowerCase() === 'employee') {
+            } else if (user.Role.toLowerCase() === 'employee') {
                 navigate('/employeeHome');
             } else {
                 alert('You are not assigned any role, please contact the support center');

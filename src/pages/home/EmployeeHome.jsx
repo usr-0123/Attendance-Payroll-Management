@@ -23,12 +23,32 @@ const Home = () => {
         navigate('/')
     }
 
+    // Function to fetch user details from local storage
+function getLoggedInUser() {
+    // Retrieve user details from local storage
+    const loggedInUserJSON = localStorage.getItem('loggedInUser');
+  
+    // Check if user details exist in local storage
+    if (loggedInUserJSON) {
+
+      // Parse user details from JSON to JavaScript object
+      const loggedInUser = JSON.parse(loggedInUserJSON);
+      return loggedInUser; // Return user details
+    } else {
+      return null; // Return null if user details not found in local storage
+    }
+  }
+  
+  // Function to get the user details
+  const loggedInUser = getLoggedInUser();
+
     return (
     <div className='home'>
         <div className="navbar">
             <div className='navbarLeft'>
                 <img src={Logo} alt="logo" />
             </div>
+            <div>Hello {loggedInUser.user.First_name}</div>
             <div className='navbarRight'>
                 <img src={Photo} alt="profile" height={80}/>
                 <MdLogout style={{fontSize: "30px"}} onClick={handleLogout}/>

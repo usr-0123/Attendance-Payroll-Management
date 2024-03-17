@@ -10,7 +10,11 @@
         "Birth_date":"1980-01-15",
         "Department": "Engineering",
         "Job_title": "Software Engineer",
-        "password": "123456"
+        "password": "123456",
+
+        "Country": "Kenya",
+        "City": "Nyeri",
+        "Postal_address": "1863"
     },
     {
         "First_name": "Jane",
@@ -23,7 +27,11 @@
         "Birth_date":"1985-03-20",
         "Department": "Marketing",
         "Job_title": "Marketing Manager",
-        "password": "123456"
+        "password": "123456",
+
+        "Country": "Kenya",
+        "City": "Nyeri",
+        "Postal_address": "1863"
     },
     {
         "First_name": "Michael",
@@ -36,6 +44,10 @@
         "Birth_date":"1985-03-20",
         "Department": "Human Resource",
         "Job_title": "Human Resource Assistance",
-        "password": "123456"
+        "password": "123456",
+
+        "Country": "Kenya",
+        "City": "Nyeri",
+        "Postal_address": "1863"
     }
 ]

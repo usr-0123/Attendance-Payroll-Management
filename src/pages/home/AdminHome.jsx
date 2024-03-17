@@ -14,9 +14,9 @@ import FinancialManagement from '../admin/FinancialManagement'
 
 import './Home.scss'
 import EmployeeManagement from '../admin/EmployeeManagement';
-import ProfilePage from '../Profile/ProfilePage';
+import AdminProfile from '../../components/Admin/profilePage/AdminProfile'
 
-const AdminHome = ({user}) => {
+const AdminHome = () => {
     const navigate = useNavigate();
     const handleLogout = () => {
         // clear local storage
@@ -30,7 +30,28 @@ const AdminHome = ({user}) => {
         console.log("I am clicked");
     }
 
-    // console.log(user);
+// Function to fetch user details from local storage
+function getLoggedInUser() {
+    // Retrieve user details from local storage
+    const loggedInUserJSON = localStorage.getItem('loggedInUser');
+  
+    // Check if user details exist in local storage
+    if (loggedInUserJSON) {
+
+      // Parse user details from JSON to JavaScript object
+      const loggedInUser = JSON.parse(loggedInUserJSON);
+      return loggedInUser; // Return user details
+    } else {
+      return null; // Return null if user details not found in local storage
+    }
+  }
+  
+  // Function to get the user details
+  const loggedInUser = getLoggedInUser();
+
+//   const First_name = loggedInUser;
+
+  
 
     return (
     <div className='home'>
@@ -38,7 +59,7 @@ const AdminHome = ({user}) => {
             <div className='navbarLeft'>
                 <img src={Logo} alt="logo" />
             </div>
-            <div>Hello</div>
+            <div>Hello {loggedInUser.user.First_name}</div>
             <div className='navbarRight'>
                 <img src={Photo} alt="profile" height={80}/>
                 <MdLogout style={{fontSize: "30px"}} onClick={handleLogout}/>
@@ -52,7 +73,7 @@ const AdminHome = ({user}) => {
             <Routes>
                 <Route path='/adminHome' element = {<ScheduleManagement />}></Route>
                 <Route path='/employeeManagement' element = {<EmployeeManagement />}></Route>
-                <Route path='/adminProfilePage' element = {<ProfilePage/>}></Route>
+                <Route path='/adminProfilePage' element = {<AdminProfile />}></Route>
                 <Route path='/attendanceReport' element = {<AttendanceReport />}></Route>
                 <Route path='/financialManagement' element = {< FinancialManagement/>}></Route>
             </Routes>
