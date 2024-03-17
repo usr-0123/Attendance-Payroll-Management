@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './Login.scss';
+
 import Logo from '../../assets/Logo.svg';
 import PrivacyPolicy from '../../components/login/PrivacyPolicy';
 
@@ -39,24 +43,29 @@ const Login = () => {
 
             if (user.Role.toLowerCase() === 'admin') {
                 navigate('/adminHome');
+                alert('You are logged in as an admin');
             } else if (user.Role.toLowerCase() === 'employee') {
                 navigate('/employeeHome');
+                alert('You are logged in as an employee');
             } else {
-                alert('You are not assigned any role, please contact the support center');
+                alert('You are not assigned any role, please contact the support center', 'error');
             }
         } else {
-            alert('Invalid email or password');
+            alert('Invalid email or password', 'error');
         }
     };
 
-    console.log(users);
-
     const forgotPassword = () => {
-        alert('Please contact the support center to reset your logins!')
+        alert('Please contact the support center to reset your logins!', 'info');
     }
+
+    const notify = (message, type = 'success') => {
+        toast[type](message);
+    };
 
     return (
         <div className='loginPage'>
+            <ToastContainer />
             <div className='loginPageHeader'>
                 <img src={Logo} alt="logo" />
             </div>

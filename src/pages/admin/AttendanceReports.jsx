@@ -111,6 +111,9 @@ const AttendanceReport = () => {
                 </div>
             </div>
         </div>
+        <div className="generateReportDocs">
+            Generate a pdf
+        </div>
         </>
     )
 }

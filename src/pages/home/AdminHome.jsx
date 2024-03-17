@@ -13,12 +13,14 @@ import AttendanceReport from '../admin/AttendanceReports';
 import FinancialManagement from '../admin/FinancialManagement'
 
 import './Home.scss'
+
 import EmployeeManagement from '../admin/EmployeeManagement';
 import AdminProfile from '../../components/Admin/profilePage/AdminProfile'
 
 const AdminHome = () => {
     const navigate = useNavigate();
     const handleLogout = () => {
+
         // clear local storage
         localStorage.removeItem('loggedInUser');
 
@@ -26,12 +28,9 @@ const AdminHome = () => {
         navigate('/')
     }
 
-    const clicked = () => {
-        console.log("I am clicked");
-    }
-
 // Function to fetch user details from local storage
 function getLoggedInUser() {
+    
     // Retrieve user details from local storage
     const loggedInUserJSON = localStorage.getItem('loggedInUser');
   
