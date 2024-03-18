@@ -1,4 +1,4 @@
-import React,  {useState} from "react";
+import React,  {useState, useEffect} from "react";
 
 import { GoDotFill } from "react-icons/go";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -10,6 +10,26 @@ import Photo from '../../assets/alexander.jpg'
 import './EmployeeManagement.scss'
 
 const EmployeeManagement = () => {
+
+    //Fetching users
+    const [users, setUsers] = useState([]);
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+          try {
+            const response = await fetch('/src/json/users.json');
+            const userData = await response.json();
+            setUsers(userData);
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+          }
+        };
+    
+        fetchUsers();
+      }, []);
+
+    //   console.log('This is the users fetched',users);
     
     // Function to toggle selected employee visibility
     const [isSelVisible, setIsSelVisible] = useState(false)
@@ -23,12 +43,32 @@ const EmployeeManagement = () => {
         setIsVisible(!isVisible);
     };
 
+        // Function to toggle visibility
+    const [isEdtVisible, setIsEdtVisible] = useState(false)
+    const toggleEditUserForm = () => {
+        setIsEdtVisible(!isEdtVisible);
+    };
+
     // Function to toggle buttons visibility
     const [isBtnVisible, setIsBtnVisible] = useState(true)
     const [isBtnsVisible, setIsBtnsVisible] = useState(false)
     const toggleActionBtn = () => {
         setIsBtnVisible(!isBtnVisible) || setIsBtnsVisible(!isBtnsVisible)
     };
+
+    const selectUser = (user) => {
+        setSelectedUser(user);
+    };
+
+    const deleteUser = () => {
+        if (selectedUser) {
+          const updatedUsers = users.filter((user) => user !== selectedUser);
+          setUsers(updatedUsers);
+          setSelectedUser(null); // Clear selected user after deletion
+        }
+      };
+
+    //   console.log('The details of the selected user:', setSelectedUser);
 
     return (
         <div className="employeeManagement">
@@ -45,24 +85,36 @@ const EmployeeManagement = () => {
                     <span>Status</span>
                     <span>Actions</span>
                 </div>
-                <div className="employeeManagementListBodyContent">
-                    <span onClick={toggleSelectedUser}>Amelia Jones</span>
-                    <span>Event Planner</span>
-                    <span>amelia@luwi.ac.ke</span>
-                    <span><GoDotFill /> Active</span>
-                    <button onClick={toggleActionBtn}>
+                <ul>
+              {users.map((user, index) => (
+                <li key={index} className='employeeManagementListBodyContent'>
+                  <span onClick={() => selectUser(user)}>{user.First_name}</span>
+                  <span>{user.Job_title}</span>
+                  <span>{user.Contact_information}</span>
+                  <span
+                  style={{
+                    color:
+                      user.Leave_status === "Active" ? "green" : "red",
+                  }}
+                >
+                  <GoDotFill />
+                  {user.Leave_status}
+                </span>
+                  <button onClick={toggleActionBtn}>
                         {isBtnVisible &&
                         <HiDotsHorizontal />}
                     {isBtnsVisible &&
                     <div>                        
-                        <RiEdit2Fill />
+                        <RiEdit2Fill onClick={toggleEditUserForm}/>
                         <MdDelete />
                     </div>}
                     </button>
-                </div>
+                </li>
+              ))}
+            </ul>
             </div>
             </div>
-            {isSelVisible &&
+            {selectedUser &&
             <div className="selectedEmployee">
                 <div className="selectedEmployeeTop">
                     <div className="selectedEmployeeTopHeader">
@@ -70,27 +122,27 @@ const EmployeeManagement = () => {
                             <img src={Photo} alt="Profile" height={100} width={100}/>
                             <div className="selectedEmployeeTopHeaderUserinfo">
                                 <span className="selectedEmployeeTopHeaderUserGenderInfo">Gender</span>
-                                <span>Male</span>
+                                <span>{selectedUser.Gender}</span>
                             </div>
                         </div>
                         <div className="selectedEmployeeTopHeaderUser1">
                             <div className="selectedEmployeeTopHeaderUser1Name">
                                 <span className="selectedEmployeeTopHeaderUser1Header">Name</span>
-                                <span>Lewis Kipngetich Kemboi</span>
+                                <span>{`${selectedUser.First_name} ${selectedUser.Last_name}`}</span>
                             </div>
                             <div className="selectedEmployeeTopHeaderUser1Name">
                                 <span className="selectedEmployeeTopHeaderUser1Header">Identity Number</span>
-                                <span>19193030</span>
+                                <span>{selectedUser.Identity_number}</span>
                             </div>
                         </div>
                         <div className="selectedEmployeeTopHeaderUser1">
                             <div className="selectedEmployeeTopHeaderUser1Name">
                                 <span className="selectedEmployeeTopHeaderUser1Header">Email Address</span>
-                                <span>lewis@luwi.ac.ke</span>
+                                <span>{selectedUser.Email_address}</span>
                             </div>
                             <div className="selectedEmployeeTopHeaderUser1Name">
                                 <span className="selectedEmployeeTopHeaderUser1Header">Contact</span>
-                                <span>+254722112112</span>
+                                <span>{selectedUser.Contact_information}</span>
                             </div>
                         </div>
                     </div>
@@ -98,11 +150,11 @@ const EmployeeManagement = () => {
                         <div className="selectedEmployeeTopMiddleS1">
                             <div className="selectedEmployeeTopMiddleS1Container">
                                 <span className="selectedEmployeeTopMiddleS1ContainerHeader">Job Position</span>
-                                <span>Chief Executive Officer</span>
+                                <span>{selectedUser.Job_title}</span>
                             </div>
                             <div className="selectedEmployeeTopMiddleS1Container">
                                 <span className="selectedEmployeeTopMiddleS1ContainerHeader">Department</span>
-                                <span>Administration</span>
+                                <span>{selectedUser.Department}</span>
                             </div>
                         </div>
                         <div className="selectedEmployeeTopMiddleS2">
@@ -111,8 +163,11 @@ const EmployeeManagement = () => {
                         </div>
                     </div>
                 </div>
+                <button onClick={deleteUser}>
+                    Delete Employee
+                <MdDelete />
+                </button>
             </div>}
-
 
             <div className="newEmployee">
             {isVisible && 
@@ -179,11 +234,12 @@ const EmployeeManagement = () => {
             </div>
             }
             </div>
+            
             {/* // Edit form */}
             <div className="newEmployee">
-            {isVisible && 
+            {isEdtVisible && 
             <div className="newEmployeeForm">
-                <span className="newEmployeeFormTitle">New Employee</span>
+                <span className="newEmployeeFormTitle">Edit Employee</span>
                 <div className="basicInfo">
                     <div className="basicInfoNames">
                         <input type="text" placeholder="First Name"/>

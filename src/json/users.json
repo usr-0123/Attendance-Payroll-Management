@@ -14,7 +14,9 @@
 
         "Country": "Kenya",
         "City": "Nyeri",
-        "Postal_address": "1863"
+        "Postal_address": "1863",
+        "Leave_status": "Active",
+        "Identity_number": "12345678"
     },
     {
         "First_name": "Jane",
@@ -31,7 +33,9 @@
 
         "Country": "Kenya",
         "City": "Nyeri",
-        "Postal_address": "1863"
+        "Postal_address": "1863",
+        "Leave_status": "Leave",
+        "Identity_number": "23456781"
     },
     {
         "First_name": "Michael",
@@ -48,6 +52,27 @@
 
         "Country": "Kenya",
         "City": "Nyeri",
-        "Postal_address": "1863"
+        "Postal_address": "1863",
+        "Leave_status": "Leave",
+        "Identity_number": "34567812"
+    },
+    {
+        "First_name": "Leah",
+        "Last_name": "Mbuthia",
+        "Email_address": "leahnyambura@example.com",
+        "Physical_address": "789 NYR St",
+        "Contact_information": "212-345-0123",
+        "Gender": "Female",
+        "Role":"employee",
+        "Birth_date":"1995-05-10",
+        "Department": "Service Delivery Department",
+        "Job_title": "Service Supervisor Assistant",
+        "password": "123456",
+
+        "Country": "Kenya",
+        "City": "Nyeri",
+        "Postal_address": "1002",
+        "Leave_status": "Active",
+        "Identity_number": "39567487"
     }
 ]
