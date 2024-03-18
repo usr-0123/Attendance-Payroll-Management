@@ -10,7 +10,7 @@ The link below shows the figma design for this project:
 
 ## Preview Link
 
-![Preview](/client/public/Preview.png)
+![Preview](/public/Preview.png)
 
 ## Icons
 The link below is for the react icons used
