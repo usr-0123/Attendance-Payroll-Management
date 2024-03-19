@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import './Login.scss';
 
@@ -65,7 +63,7 @@ const Login = () => {
 
     return (
         <div className='loginPage'>
-            <ToastContainer />
+            {/* <ToastContainer />  */}
             <div className='loginPageHeader'>
                 <img src={Logo} alt="logo" />
             </div>
