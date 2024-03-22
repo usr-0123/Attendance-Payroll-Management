@@ -1,4 +1,4 @@
-import { useNavigate ,NavLink } from "react-router-dom";
+import { useNavigate ,NavLink , useLocation} from "react-router-dom";
 
 import { IoHomeSharp } from "react-icons/io5";
 import { TbClipboardText } from "react-icons/tb";
@@ -8,9 +8,12 @@ import './EmployeeSidebar.scss'
 
 const EmployeeSidebar = () => {
     const navigate = useNavigate();
-    const handleProfile = () => {
-        navigate('/employeeHome/employeeProfile')
-    }
+    const location = useLocation();
+
+    // const handleProfile = () => {
+        // navigate('/employeeHome/employeeProfile')
+    // }
+
     const adminSidebarItems = [
         {
             icon:<IoHomeSharp />,
@@ -26,20 +29,29 @@ const EmployeeSidebar = () => {
 
     return (
         <div className="sidenav">
-            <div>
-            {adminSidebarItems && adminSidebarItems.map((item) => (
-                <NavLink to={item.path} className={({ isActive }) => isActive ? "menu-item active" : "menu-item"} key={item.path}>
-                    <div className="sidenavItems">
+            <div className="sidenavMenus">
+            {adminSidebarItems.map((item) => (
+                <NavLink 
+                    to={item.path} 
+                    className="menu-item"
+                    activeClassName="active"
+                    key={item.path}
+                >
+                    <div className="sidenavItems" activeClassName="active">
                         {item.icon}
                         <p>{item.name}</p>
                     </div>
                 </NavLink>
             ))}
             </div>
-            <div className="employeeProfile" onClick={handleProfile}>
-            <FaUserAlt />
-            <span>Profile</span>
-            </div>
+            <NavLink
+                to="/employeeHome/employeeProfile"
+                className="employeeProfile"
+                activeClassName="active"
+                >
+                <FaUserAlt />
+                Profile
+            </NavLink>
         </div>
     )
 }

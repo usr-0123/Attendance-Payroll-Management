@@ -6,7 +6,7 @@ import './AttendanceReport.scss';
 
 const AttendanceReport = () => {
   const data = [
-    { name: 'Week 1', attendance: 50 },
+    { name: 'Week 1', attendance: 100 },
     { name: 'Week 2', attendance: 85 },
     { name: 'Week 3', attendance: 90 },
     { name: 'Week 4', attendance: 88 },
@@ -81,7 +81,7 @@ const AttendanceReport = () => {
   const styles = StyleSheet.create({
     page: {
       flexDirection: 'row',
-      backgroundColor: '#E4E4E4',
+      backgroundColor: 'red',
       padding: 10,
     },
     section: {

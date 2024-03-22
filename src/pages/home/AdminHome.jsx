@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Routes, Route, useNavigate } from 'react-router-dom'
+import {Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 
 import Logo from '../../assets/Logo.svg'
 import Photo from '../../assets/alexander.jpg'
@@ -18,6 +18,8 @@ import EmployeeManagement from '../admin/EmployeeManagement';
 import AdminProfile from '../../components/Admin/profilePage/AdminProfile'
 
 const AdminHome = () => {
+    const [selectedPage, setSelectedPage] = useState('adminHome');
+    const location = useLocation();
     const navigate = useNavigate();
     const handleLogout = () => {
 
@@ -39,9 +41,9 @@ function getLoggedInUser() {
 
       // Parse user details from JSON to JavaScript object
       const loggedInUser = JSON.parse(loggedInUserJSON);
-      return loggedInUser; // Return user details
+      return loggedInUser;
     } else {
-      return null; // Return null if user details not found in local storage
+      return null;
     }
   }
   
@@ -50,7 +52,10 @@ function getLoggedInUser() {
 
 //   const First_name = loggedInUser;
 
-  
+ // Function to handle page click
+ const handlePageClick = (page) => {
+    setSelectedPage(page);
+}
 
     return (
     <div className='home'>
@@ -66,7 +71,7 @@ function getLoggedInUser() {
         </div>
         <div className='bottomBar'>
         <div className="sidebar">
-            <AdminSidebar />
+            <AdminSidebar handlePageClick={handlePageClick} selectedPage={selectedPage} />
         </div>
         <div className="mainContainer">
             <Routes>

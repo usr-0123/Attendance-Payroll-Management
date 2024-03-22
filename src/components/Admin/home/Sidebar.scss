@@ -5,22 +5,33 @@
     height: 100%;
 
     .adminSidenavMenus {
-
         .menu-item {
-         display: flex;
-         gap: 20px;
-         width: 100%;
-         text-decoration: none;
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            text-decoration: none;
+            color: #000;
+            border-radius: 13px;
 
-         .adminSidenavMenuItems {
-             display: flex;
-             align-items: center;
-             padding: 10px;
-             gap: 20px;
-             text-decoration: none;
-             color: black;
-             font-size: 16px;
-             font-weight: bold;
+            &:hover {
+                background-color: #f0f0f0;
+            }
+
+            &.active {
+                background-color: #0083FF;
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+            .adminSidenavMenuItems {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                gap: 20px;
+                text-decoration: none;
+                // color: black;
+                font-size: 16px;
+                font-weight: bold;
             }
         }
     }
@@ -30,8 +41,22 @@
         align-items: center;
         gap: 20px;
         padding: 10px;
-        width: 100%;
+        // width: 100%;
+        // background-color: #666464;
         font-size: 16px;
         font-weight: bold;
+        text-decoration: none;
+        color: #000;
+        border-radius: 13px;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &.active {
+            background-color: #0083FF;
+            color: #fff;
+            text-decoration: none;
+        }
     }
 }

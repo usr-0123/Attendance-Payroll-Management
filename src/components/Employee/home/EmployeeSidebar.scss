@@ -4,19 +4,36 @@
     justify-content: space-between;
     height: 100%;
     
-    .sidenavItems {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
-        font-weight: bold;
-    }
-
+    .sidenavMenus {
     .menu-item {
         display: flex;
         text-decoration: none;
         color: black;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        font-weight: bold;
+        border-radius: 13px;
+
+        .sidenavItems {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            // padding: 10px;
+            font-weight: bold;
+        }
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &.active {
+            background-color: #0083FF;
+            color: #fff;
+            text-decoration: none;
+        }
     }
+}
 
     .employeeProfile {
         align-items: center;
@@ -24,5 +41,18 @@
         gap: 10px;
         font-weight: bold;
         padding: 10px;
+        color: black;
+        text-decoration: none;
+        border-radius: 13px;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+
+        &.active {
+            background-color: #0083FF;
+            color: #fff;
+            text-decoration: none;
+        }
     }
 }

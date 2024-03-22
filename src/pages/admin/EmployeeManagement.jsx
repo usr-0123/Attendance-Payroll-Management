@@ -7,9 +7,15 @@ import { RiEdit2Fill } from "react-icons/ri";
 
 import Photo from '../../assets/alexander.jpg'
 
+import { useGetEmployeesQuery } from "../../features/employees/EmployeesApi";
+
 import './EmployeeManagement.scss'
 
-const EmployeeManagement = () => {
+const EmployeeManagement = (employees) => {
+
+    const { data: employee = [] } = useGetEmployeesQuery();
+
+    console.log("data", data);
 
     //Fetching users
     const [users, setUsers] = useState([]);
@@ -19,6 +25,7 @@ const EmployeeManagement = () => {
         const fetchUsers = async () => {
           try {
             const response = await fetch('/src/json/users.json');
+            
             const userData = await response.json();
             setUsers(userData);
           } catch (error) {

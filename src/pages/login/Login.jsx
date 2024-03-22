@@ -8,6 +8,8 @@ import PrivacyPolicy from '../../components/login/PrivacyPolicy';
 
 import { FaUserAlt } from "react-icons/fa";
 
+import { SuccessToast, ErrorToast, LoadingToast, ToasterContainer } from "../../Toaster";
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,8 +18,6 @@ const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-
-        // Fetch user details from JSON file
         const fetchUsers = async () => {
             try {
                 const response = await fetch('/src/json/users.json');
@@ -32,6 +32,7 @@ const Login = () => {
     }, []);
 
     const handleLogin = () => {
+        LoadingToast(false);
 
         const user = users.find(user => user.Email_address === email && user.password === password);
 
@@ -41,29 +42,25 @@ const Login = () => {
 
             if (user.Role.toLowerCase() === 'admin') {
                 navigate('/adminHome');
-                alert('You are logged in as an admin');
+                SuccessToast('You are logged in as an admin');
             } else if (user.Role.toLowerCase() === 'employee') {
                 navigate('/employeeHome');
-                alert('You are logged in as an employee');
+                SuccessToast('You are logged in as an employee');
             } else {
-                alert('You are not assigned any role, please contact the support center', 'error');
+                ErrorToast('You are not assigned any role, please contact the support center');
             }
         } else {
-            alert('Invalid email or password', 'error');
+            ErrorToast('Invalid email or password');
         }
     };
 
     const forgotPassword = () => {
-        alert('Please contact the support center to reset your logins!', 'info');
+        ErrorToast('Please contact the support center to reset your logins!');
     }
-
-    const notify = (message, type = 'success') => {
-        toast[type](message);
-    };
 
     return (
         <div className='loginPage'>
-            {/* <ToastContainer />  */}
+            <ToasterContainer />
             <div className='loginPageHeader'>
                 <img src={Logo} alt="logo" />
             </div>

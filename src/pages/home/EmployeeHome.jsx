@@ -1,4 +1,6 @@
-import {Routes, Route, useNavigate } from 'react-router-dom'
+import {Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+
+import React from 'react';
 
 import Logo from '../../assets/Logo.svg'
 import Photo from '../../assets/alexander.jpg'
@@ -12,8 +14,11 @@ import EmployeeProfile from '../Profile/ProfilePage'
 import EmployeeSidebar from '../../components/Employee/home/EmployeeSidebar';
 
 import './Home.scss'
+import { useState } from 'react';
 
 const Home = () => {
+    const [selectedPage, setSelectedPage] = useState('employeeHome');
+    const location = useLocation();
     const navigate = useNavigate();
     const handleLogout = () => {
         // clear local storage
@@ -24,7 +29,7 @@ const Home = () => {
     }
 
     // Function to fetch user details from local storage
-function getLoggedInUser() {
+    function getLoggedInUser() {
     // Retrieve user details from local storage
     const loggedInUserJSON = localStorage.getItem('loggedInUser');
   
@@ -38,9 +43,17 @@ function getLoggedInUser() {
       return null; // Return null if user details not found in local storage
     }
   }
+
+  console.log("response", response);
+
   
   // Function to get the user details
   const loggedInUser = getLoggedInUser();
+
+   // Function to handle page click
+ const handlePageClick = (page) => {
+    setSelectedPage(page);
+ }
 
     return (
     <div className='home'>
@@ -56,7 +69,7 @@ function getLoggedInUser() {
         </div>
         <div className='bottomBar'>
         <div className="sidebar">
-            < EmployeeSidebar/>
+            < EmployeeSidebar handlePageClick={handlePageClick} selectedPage={selectedPage}  />
         </div>
         <div className="mainContainer">
             <Routes>
