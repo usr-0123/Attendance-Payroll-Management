@@ -5,7 +5,6 @@ export const employeeApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8200/api" }),
   tagTypes: ["Employee"],
   endpoints: (builder) => ({
-
     getEmployees: builder.query({
       query: () => "employee/fetchall",
       providesTags: ["Employee"],
@@ -50,7 +49,23 @@ export const employeeApi = createApi({
       }),
       invalidatesTags: ["Employee"],
     }),
-  }),
+
+    fetchAllEmployeeDetails: builder.query({
+      query: () => "employee/fetchall/details",
+      providesTags: ["Employee"],
+    }),
+
+    countEmployees: builder.query({
+        query: () => "employee/count",
+        providesTags: ["Employee"],
+      }),
+
+    // New endpoint: Get employee details including leave, position, and department
+    getEmployeeLeavePositionDepartment: builder.query({
+      query: () => "employee/leave/position/department",
+      providesTags: ["Employee"],
+    }),
+    }),
 });
 
 export const {
@@ -60,6 +75,7 @@ export const {
   useAuthenticateEmployeeMutation,
   useUpdateEmployeeMutation,
   useDeleteEmployeeMutation,
+  useFetchAllEmployeeDetailsQuery,
+  useCountEmployeesQuery,
+  useGetEmployeeLeavePositionDepartmentQuery,
 } = employeeApi;
-
-// export const { useGetEmployeesQuery }=employeeApi

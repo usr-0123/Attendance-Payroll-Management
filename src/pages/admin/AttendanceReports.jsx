@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
 import { StyleSheet, Text, View, PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
 
 import './AttendanceReport.scss';
+
+import AttendanceEmployeeList from '../../components/Admin/attendanceReports/AttendanceEmployeeList';
+
+import AttendanceStatistics from '../../components/Admin/attendanceReports/AttendanceStatistics';
 
 const AttendanceReport = () => {
   const data = [
@@ -57,26 +63,6 @@ const AttendanceReport = () => {
         return MyDocument;
   };
 
-    // Function to generate employees PDF data
-    const generateUsersPDF = (users) => {
-        // Create a PDF document
-        const MyDocument = (
-          <Document>
-            <Page style={styles.page}>
-              <View style={styles.section}>
-                <Text style={styles.title}>Employees List</Text>
-                {users.map((user, index) => (
-                  <Text style={styles.data} key={index}>{`First_ame: ${user.First_name}, Last_name: ${user.Lastr_name}, Email: ${user.Email_address}, Department: ${user.Department}`}</Text>
-                ))}
-              </View>
-            </Page>
-          </Document>
-        );
-    
-        // Return the document instead of directly downloading it
-            return MyDocument;
-      };
-
   // Styles for PDF
   const styles = StyleSheet.create({
     page: {
@@ -123,20 +109,7 @@ const AttendanceReport = () => {
             <span className='AttendanceReportTopMonthlyHeader'>
               Monthly Statistics
             </span>
-            <div className='AttendanceReportTopMonthlyTotal'>
-              <span className='AttendanceReportTopMonthlyTotalHeader'>
-                Total Employees
-              </span>
-              <span>500</span>
-            </div>
-            <div className='AttendanceReportTopMonthlyAttendance'>
-              <span className='AttendanceReportTopMonthlyAttendanceHeader'>Monthly Employee Attendance</span>
-              <span>480</span>
-            </div>
-            <div className='AttendanceReportTopMonthlyLeave'>
-              <span className='AttendanceReportTopMonthlyLeaveHeader'>Employees on leave</span>
-              <span>20</span>
-            </div>
+            {/* <div><AttendanceStatistics /></div> */}
           </div>
         </div>
         <div className='AttendanceReportMiddle'>
@@ -161,29 +134,7 @@ const AttendanceReport = () => {
         <div className='AttendanceReportBottom'>
           <span className='AttendanceReportBottomHeader'>Employee Attendance</span>
           <div>
-            <div className='AttendanceReportBottomNav'>
-              <span>First Name</span>
-              <span>Last Name</span>
-              <span>Email</span>
-              <span>Department</span>
-              <span>Attendance</span>
-            </div>
-            <ul>
-              {users.map((user, index) => (
-                <li key={index} className='AttendanceReportBottomHList'>
-                  <span>{user.First_name}</span>
-                  <span>{user.Last_name}</span>
-                  <span>{user.Email_address}</span>
-                  <span>{user.Department}</span>
-                  <span>100%</span>
-                </li>
-              ))}
-            </ul>
-            <PDFDownloadLink document={generateUsersPDF(users)} fileName="employees_list.pdf">
-            {({ blob, url, loading, error }) =>
-              loading ? 'Loading document...' : 'Download PDF'
-            }
-          </PDFDownloadLink>
+            <AttendanceEmployeeList />
           </div>
         </div>
       </div>

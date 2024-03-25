@@ -37,6 +37,10 @@ export const leaveApi = createApi({
       }),
       invalidatesTags: ["Leave"],
     }),
+    countLeaveEntries: builder.query({
+      query: () => "leave/count/entries",
+      providesTags: ["Leave"],
+    }),
   }),
 });
 
@@ -46,4 +50,5 @@ export const {
   useAddLeaveMutation,
   useUpdateLeaveMutation,
   useDeleteLeaveMutation,
+  useCountLeaveEntriesQuery,
 } = leaveApi;
