@@ -7,13 +7,14 @@ export const advanceApi = createApi({
   endpoints: (builder) => ({
     addAdvance: builder.mutation({
       query: (advance) => ({
-        url: "advance/add",
+        url: "advance",
         method: "POST",
         body: advance,
       }),
+      invalidatesTags: ["Advance"],
     }),
     getAdvances: builder.query({
-      query: () => "advance/fetchAll",
+      query: () => "advance/all",
       providesTags: ["Advance"],
     }),
     getAdvanceById: builder.query({
@@ -27,12 +28,15 @@ export const advanceApi = createApi({
         method: "PUT",
         body: updatedAdvance,
       }),
+      invalidatesTags: (result) =>
+        result ? [{ type: "Advance", id: result.AdvanceID }] : [],
     }),
     deleteAdvance: builder.mutation({
       query: (AdvanceID) => ({
         url: `advance/delete/${AdvanceID}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Advance"],
     }),
   }),
 });

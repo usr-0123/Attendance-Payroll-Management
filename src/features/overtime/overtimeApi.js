@@ -6,7 +6,7 @@ export const overtimeApi = createApi({
   tagTypes: ["Overtime"],
   endpoints: (builder) => ({
     getOvertimes: builder.query({
-      query: () => "overtime/fetchAll",
+      query: () => "overtime/all",
       providesTags: ["Overtime"],
     }),
     getOvertimeById: builder.query({

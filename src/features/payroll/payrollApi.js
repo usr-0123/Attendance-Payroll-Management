@@ -6,7 +6,7 @@ export const payrollApi = createApi({
   tagTypes: ["Payroll"],
   endpoints: (builder) => ({
     getPayrolls: builder.query({
-      query: () => "payroll/fetchAll",
+      query: () => "payroll/all",
       providesTags: ["Payroll"],
     }),
     getPayrollById: builder.query({

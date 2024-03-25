@@ -16,7 +16,7 @@ export const positionApi = createApi({
     }),
     addPosition: builder.mutation({
       query: (position) => ({
-        url: "positions/add",
+        url: "position",
         method: "POST",
         body: position,
       }),

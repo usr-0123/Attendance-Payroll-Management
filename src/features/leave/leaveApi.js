@@ -6,7 +6,7 @@ export const leaveApi = createApi({
   tagTypes: ["Leave"],
   endpoints: (builder) => ({
     getLeaves: builder.query({
-      query: () => "leave/fetchAll",
+      query: () => "leave/all",
       providesTags: ["Leave"],
     }),
     getLeaveById: builder.query({

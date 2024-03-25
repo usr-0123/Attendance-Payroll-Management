@@ -7,13 +7,14 @@ export const deductionApi = createApi({
   endpoints: (builder) => ({
     addDeduction: builder.mutation({
       query: (deduction) => ({
-        url: "deduction/add",
+        url: "deduction",
         method: "POST",
         body: deduction,
       }),
+      invalidatesTags: ["Deduction"],
     }),
     getDeductions: builder.query({
-      query: () => "deduction/fetchAll",
+      query: () => "deduction/all",
       providesTags: ["Deduction"],
     }),
     getDeductionById: builder.query({
@@ -27,12 +28,15 @@ export const deductionApi = createApi({
         method: "PUT",
         body: updatedDeduction,
       }),
+      invalidatesTags: (result) =>
+        result ? [{ type: "Deduction", id: result.DeductionID }] : [],
     }),
     deleteDeduction: builder.mutation({
       query: (DeductionID) => ({
         url: `deduction/delete/${DeductionID}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Deduction"],
     }),
   }),
 });
