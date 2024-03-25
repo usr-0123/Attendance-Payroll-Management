@@ -21,6 +21,7 @@ const AdminHome = () => {
     const [selectedPage, setSelectedPage] = useState('adminHome');
     const location = useLocation();
     const navigate = useNavigate();
+
     const handleLogout = () => {
 
         // clear local storage
@@ -30,32 +31,36 @@ const AdminHome = () => {
         navigate('/')
     }
 
-// Function to fetch user details from local storage
-function getLoggedInUser() {
     
     // Retrieve user details from local storage
     const loggedInUserJSON = localStorage.getItem('loggedInUser');
-  
-    // Check if user details exist in local storage
-    if (loggedInUserJSON) {
 
-      // Parse user details from JSON to JavaScript object
-      const loggedInUser = JSON.parse(loggedInUserJSON);
-      return loggedInUser;
-    } else {
-      return null;
+    // console.log("loggedInUser", loggedInUserJSON);
+
+    // Function to fetch user details from local storage
+    function getLoggedInUser() {
+  
+        // Check if user details exist in local storage
+        if (loggedInUserJSON) {
+
+        // Parse user details from JSON to JavaScript object
+        const loggedInUser = JSON.parse(loggedInUserJSON);
+
+        // console.log("loggedInUser", loggedInUser.loggedInUser.employee);
+      
+        return loggedInUser;
+        } else {
+        return null;
+        }
     }
-  }
   
-  // Function to get the user details
-  const loggedInUser = getLoggedInUser();
+    // Function to get the user details
+    const loggedInUser = getLoggedInUser();
 
-//   const First_name = loggedInUser;
-
- // Function to handle page click
- const handlePageClick = (page) => {
-    setSelectedPage(page);
-}
+    // Function to handle page click
+    const handlePageClick = (page) => {
+        setSelectedPage(page);
+    }
 
     return (
     <div className='home'>
@@ -63,7 +68,7 @@ function getLoggedInUser() {
             <div className='navbarLeft'>
                 <img src={Logo} alt="logo" />
             </div>
-            <div>Hello {loggedInUser.user.First_name}</div>
+            <div>Hello {loggedInUser.loggedInUser.employee.First_name}</div>
             <div className='navbarRight'>
                 <img src={Photo} alt="profile" height={80}/>
                 <MdLogout style={{fontSize: "30px"}} onClick={handleLogout}/>

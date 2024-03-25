@@ -7,37 +7,15 @@ import { RiEdit2Fill } from "react-icons/ri";
 
 import Photo from '../../assets/alexander.jpg'
 
-import { useGetEmployeesQuery } from "../../features/employees/EmployeesApi";
-
 import './EmployeeManagement.scss'
+import { useGetEmployeesQuery } from "../../features/employees/employeesApi";
 
-const EmployeeManagement = (employees) => {
+const EmployeeManagement = () => {
 
-    const { data: employee = [] } = useGetEmployeesQuery();
+    const { data: employees, isLoading, isError } = useGetEmployeesQuery();
 
-    console.log("data", data);
+    console.log("data", employees );
 
-    //Fetching users
-    const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-          try {
-            const response = await fetch('/src/json/users.json');
-            
-            const userData = await response.json();
-            setUsers(userData);
-          } catch (error) {
-            console.error('Error fetching user data:', error);
-          }
-        };
-    
-        fetchUsers();
-      }, []);
-
-    //   console.log('This is the users fetched',users);
-    
     // Function to toggle selected employee visibility
     const [isSelVisible, setIsSelVisible] = useState(false)
     const toggleSelectedUser = () => {
@@ -63,20 +41,7 @@ const EmployeeManagement = (employees) => {
         setIsBtnVisible(!isBtnVisible) || setIsBtnsVisible(!isBtnsVisible)
     };
 
-    const selectUser = (user) => {
-        setSelectedUser(user);
-    };
-
-    const deleteUser = () => {
-        if (selectedUser) {
-          const updatedUsers = users.filter((user) => user !== selectedUser);
-          setUsers(updatedUsers);
-          setSelectedUser(null); // Clear selected user after deletion
-        }
-      };
-
-    //   console.log('The details of the selected user:', setSelectedUser);
-
+ 
     return (
         <div className="employeeManagement">
             <div className="employeeManagementList">
@@ -93,19 +58,19 @@ const EmployeeManagement = (employees) => {
                     <span>Actions</span>
                 </div>
                 <ul>
-              {users.map((user, index) => (
+              {employees.map((employees, index) => (
                 <li key={index} className='employeeManagementListBodyContent'>
-                  <span onClick={() => selectUser(user)}>{user.First_name}</span>
-                  <span>{user.Job_title}</span>
-                  <span>{user.Contact_information}</span>
+                  <span>{employees.First_name}</span>
+                  <span>{employees.Job_title}</span>
+                  <span>{employees.Contact_information}</span>
                   <span
                   style={{
                     color:
-                      user.Leave_status === "Active" ? "green" : "red",
+                    employees.Leave_status === "Active" ? "green" : "red",
                   }}
                 >
                   <GoDotFill />
-                  {user.Leave_status}
+                  {employees.Leave_status}
                 </span>
                   <button onClick={toggleActionBtn}>
                         {isBtnVisible &&
@@ -121,7 +86,7 @@ const EmployeeManagement = (employees) => {
             </ul>
             </div>
             </div>
-            {selectedUser &&
+            {/* {selectedUser &&
             <div className="selectedEmployee">
                 <div className="selectedEmployeeTop">
                     <div className="selectedEmployeeTopHeader">
@@ -174,7 +139,7 @@ const EmployeeManagement = (employees) => {
                     Delete Employee
                 <MdDelete />
                 </button>
-            </div>}
+            </div>} */}
 
             <div className="newEmployee">
             {isVisible && 

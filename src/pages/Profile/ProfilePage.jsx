@@ -7,13 +7,14 @@ import './EmployeeProfilePage.scss'
 import { RiEdit2Fill } from "react-icons/ri";
 
 const ProfilePage = () => {
+    // Retrieve user details from local storage
+    const loggedInUserJSON = localStorage.getItem('loggedInUser');
+
+    // console.log("loggedInUserJSON", loggedInUserJSON);
 
 // Function to fetch user details from local storage
 function getLoggedInUser() {
     
-    // Retrieve user details from local storage
-    const loggedInUserJSON = localStorage.getItem('loggedInUser');
-  
     // Check if user details exist in local storage
     if (loggedInUserJSON) {
 
@@ -29,6 +30,8 @@ function getLoggedInUser() {
     // Function to get the user details
     const loggedInUser = getLoggedInUser();
 
+    console.log("Employee profile", loggedInUser.loggedInUser.employee);
+
 
     return (
         <div className="profile">
@@ -42,18 +45,18 @@ function getLoggedInUser() {
                     <div className="profileMineBottomDetails">
                     <div className='profileMineBottomDetailsNames'>
                         <div className='profileMineBottomDetailsContainer'>
-                            <span>{loggedInUser.user.First_name}</span>
+                            <span>{loggedInUser.loggedInUser.employee.First_name}</span>
                         </div>
                         <div className='profileMineBottomDetailsContainer'>
-                            <span>{loggedInUser.user.Last_name}</span>
+                            <span>{loggedInUser.loggedInUser.employee.Last_name}</span>
                         </div>
                     </div>
                     <div className='profileMineBottomDetailsContainer'>
-                        {/* <span>Job Position</span> */}
-                        <span>{loggedInUser.user.Job_title}</span>
+                        <span>Job Position</span>
+                        <span>{loggedInUser.loggedInUser.employee.Job_title}</span>
                     </div>
                     <div className='profileMineBottomDetailsContainer'>
-                        {/* <span>Work Schedule</span> */}
+                        <span>Work Schedule</span>
                         <span>Remote</span>
                     </div>
                     </div>
@@ -67,32 +70,32 @@ function getLoggedInUser() {
                 <div className="profileInfo">
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>First Name</span>
-                        <span>{loggedInUser.user.First_name}</span>
+                        <span>{loggedInUser.loggedInUser.employee.First_name}</span>
                     </div>
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>Last Name</span>
-                        <span>{loggedInUser.user.Last_name}</span>
+                        <span>{loggedInUser.loggedInUser.employee.Last_name}</span>
                     </div>
                 </div>
                 <div className="profileInfo">
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>Email Address</span>
-                        <span>{loggedInUser.user.Email_address}</span>
+                        <span>{loggedInUser.loggedInUser.employee.Email_address}</span>
                     </div>
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>Phone</span>
-                        <span>{loggedInUser.user.Contact_information}</span>
+                        <span>{loggedInUser.loggedInUser.employee.Contact_information}</span>
                     </div>
                 </div>
 
                 <div className="profileInfo">
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>Gender</span>
-                        <span>{loggedInUser.user.Gender}</span>
+                        <span>{loggedInUser.loggedInUser.employee.Gender}</span>
                     </div>
                     <div className='profileInfoContainer'>
                         <span className='profileInfoHeader'>Date Of Birth</span>
-                        <span>{loggedInUser.user.Birth_date}</span>
+                        <span>{loggedInUser.loggedInUser.employee.Date_of_Birth}</span>
                     </div>
                 </div>
             </div>
@@ -104,21 +107,21 @@ function getLoggedInUser() {
                 <div className="profileAddressMiddle">
                     <div className='profileAddressMiddleContainer'>
                     <span className='profileAddressMiddleHeader'>Country</span>
-                    <span>{loggedInUser.user.Country}</span>
+                    <span>{loggedInUser.loggedInUser.employee.Country}</span>
                     </div>
                     <div className='profileAddressMiddleContainer'>
                     <span className='profileAddressMiddleHeader'>City</span>
-                    <span>{loggedInUser.user.City}</span>
+                    <span>{loggedInUser.loggedInUser.employee.City}</span>
                     </div>
                 </div>
                 <div className="profileAddressBottom">
                     <div className='profileAddressBottomContainer'>
                     <span className='profileAddressBottomHeader'>Street</span>
-                    <span>{loggedInUser.user.Physical_address}</span>
+                    <span>{loggedInUser.loggedInUser.employee.Street}</span>
                     </div>
                     <div className='profileAddressBottomContainer'>
                     <span className='profileAddressBottomHeader'>Postal Code</span>
-                    <span>{loggedInUser.user.Postal_address}</span>
+                    <span>{loggedInUser.loggedInUser.employee.Postal_code}</span>
                     </div>
                 </div>
             </div>

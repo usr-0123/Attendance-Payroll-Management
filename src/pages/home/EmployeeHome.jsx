@@ -1,5 +1,7 @@
 import {Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 
+import { ToasterContainer, LoadingToast, ErrorToast, SuccessToast } from "../../Toaster";
+
 import React from 'react';
 
 import Logo from '../../assets/Logo.svg'
@@ -17,10 +19,45 @@ import './Home.scss'
 import { useState } from 'react';
 
 const Home = () => {
+    LoadingToast("Loading...")
     const [selectedPage, setSelectedPage] = useState('employeeHome');
     const location = useLocation();
-    const navigate = useNavigate();
+
+    // Retrieve user details from local storage
+    const loggedInUserJSON = localStorage.getItem('loggedInUser');
+
+    // Function to fetch user details from local storage
+    function getLoggedInUser() {
+    
+        // Check if user details exist in local storage
+        if (loggedInUserJSON) {
+
+        // Parse user details from JSON to JavaScript object
+        const loggedInUser = JSON.parse(loggedInUserJSON);
+      
+            return loggedInUser;
+        } else {
+            return null;
+    }
+    }
+
+    // console.log("response", response);
+
+  
+  // Function to get the user details
+  const loggedInUser = getLoggedInUser();
+
+  console.log("loggedInUser", loggedInUser.loggedInUser.employee);
+
+   // Function to handle page click
+ const handlePageClick = (page) => {
+    setSelectedPage(page);
+ }
+
+ // Log out function
+ const navigate = useNavigate();
     const handleLogout = () => {
+
         // clear local storage
         localStorage.removeItem('loggedInUser');
 
@@ -28,40 +65,14 @@ const Home = () => {
         navigate('/')
     }
 
-    // Function to fetch user details from local storage
-    function getLoggedInUser() {
-    // Retrieve user details from local storage
-    const loggedInUserJSON = localStorage.getItem('loggedInUser');
-  
-    // Check if user details exist in local storage
-    if (loggedInUserJSON) {
-
-      // Parse user details from JSON to JavaScript object
-      const loggedInUser = JSON.parse(loggedInUserJSON);
-      return loggedInUser; // Return user details
-    } else {
-      return null; // Return null if user details not found in local storage
-    }
-  }
-
-  console.log("response", response);
-
-  
-  // Function to get the user details
-  const loggedInUser = getLoggedInUser();
-
-   // Function to handle page click
- const handlePageClick = (page) => {
-    setSelectedPage(page);
- }
-
     return (
     <div className='home'>
+        <ToasterContainer />
         <div className="navbar">
             <div className='navbarLeft'>
                 <img src={Logo} alt="logo" />
             </div>
-            <div>Hello {loggedInUser.user.First_name}</div>
+            <div>Hello {loggedInUser.loggedInUser.employee.First_name}</div>
             <div className='navbarRight'>
                 <img src={Photo} alt="profile" height={80}/>
                 <MdLogout style={{fontSize: "30px"}} onClick={handleLogout}/>

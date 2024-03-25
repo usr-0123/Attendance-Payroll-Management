@@ -1,91 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthenticateEmployeeMutation } from '../../features/employees/employeesApi';
+import { FaUserAlt } from "react-icons/fa";
+import Logo from '../../assets/Logo.svg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './Login.scss';
 
-import Logo from '../../assets/Logo.svg';
-import PrivacyPolicy from '../../components/login/PrivacyPolicy';
-
-import { FaUserAlt } from "react-icons/fa";
-
-import { SuccessToast, ErrorToast, LoadingToast, ToasterContainer } from "../../Toaster";
-
 const Login = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [login, { isLoading, isError }] = useAuthenticateEmployeeMutation();
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch('/src/json/users.json');
-                const data = await response.json();
-                setUsers(data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
+    const handleLogin = async () => {
+        try {
+            const { data } = await login({ Email_address: email, Password: password });
+
+            console.log("data", data);
+
+            if (data) {
+                localStorage.setItem('loggedInUser', JSON.stringify(data));
+
+                if (data.loggedInUser.Admin_role === 'admin') {
+                    navigate('/adminHome');
+                    toast.success('Welcome, admin!');
+                } else if (data.loggedInUser.Admin_role === 'employee') {
+                    navigate('/employeeHome');
+                    toast.success('Welcome, employee!');
+                }
             }
-        };
-
-        fetchUsers();
-    }, []);
-
-    const handleLogin = () => {
-        LoadingToast(false);
-
-        const user = users.find(user => user.Email_address === email && user.password === password);
-
-        if (user) {
-            localStorage.setItem('loggedInUser', JSON.stringify({user}));
-            setIsLoggedIn(true);
-
-            if (user.Role.toLowerCase() === 'admin') {
-                navigate('/adminHome');
-                SuccessToast('You are logged in as an admin');
-            } else if (user.Role.toLowerCase() === 'employee') {
-                navigate('/employeeHome');
-                SuccessToast('You are logged in as an employee');
-            } else {
-                ErrorToast('You are not assigned any role, please contact the support center');
-            }
-        } else {
-            ErrorToast('Invalid email or password');
+        } catch (error) {
+            toast.error('Login failed. Please try again.');
+            console.error('Login error:', error);
         }
     };
 
-    const forgotPassword = () => {
-        ErrorToast('Please contact the support center to reset your logins!');
-    }
-
     return (
         <div className='loginPage'>
-            <ToasterContainer />
             <div className='loginPageHeader'>
                 <img src={Logo} alt="logo" />
             </div>
             <div className="loginBody">
                 <div className="introduction">
-                    <h1>Pioneering Technology <br /> and infrastructure solutions <br /> in Africa</h1>
-                    <h2>We lead the way in engineering excellence, specializing in innovative <br />
-                    solutions for Telecommunications, ICT, and Power sectors. Partner with <br />
-                    us to elevate your business through precise and forward-thinking <br />
-                    innovation.</h2>
+                    <h1>Pioneering Technology and infrastructure solutions in Africa</h1>
+                    <h2>We lead the way in engineering excellence, specializing in innovative solutions for Telecommunications, ICT, and Power sectors. Partner with us to elevate your business through precise and forward-thinking innovation.</h2>
                 </div>
                 <div className='loginForm'>
                     <h1>LOGIN</h1>
                     <FaUserAlt style={{fontSize:"100px"}}/>
-                    <input type="email" placeholder='Enter your email address' value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <input type="password" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <button onClick={handleLogin}>Login</button>
-                    <span onClick={forgotPassword}>Forgot password</span>
-                </div>
-                <div className='resourcesConent'>
-                    {/* <PrivacyPolicy /> */}
+                    <input 
+                        type="email" 
+                        placeholder='Enter your email address'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input 
+                        type="password" 
+                        placeholder='Enter your password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button onClick={handleLogin} disabled={isLoading}>Login</button>
+                    <span>Forgot password</span>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
-}
+};
 
 export default Login;

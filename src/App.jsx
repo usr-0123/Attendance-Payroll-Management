@@ -1,3 +1,4 @@
+
 // Components
 import Footer from './layouts/Footer'
 
@@ -5,6 +6,8 @@ import Footer from './layouts/Footer'
 import EmployeeHome from './pages/home/EmployeeHome'
 import AdminHome from './pages/home/AdminHome'
 import Login from './pages/login/Login'
+import {ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Stylesheet
 import './App.css'
@@ -25,8 +28,29 @@ function App() {
       <div className='footer'>
           < Footer/>
       </div>
+      <ToastContainer />
     </>
   )
-}
+} 
+
+// import {ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+
+// const handleClick = () => {
+//   toast.success('Hello, world!');
+// };
+
+// function App(){
+//   return (
+//     <>
+//    <button onClick={handleClick}>Show Toast</button>
+//    <ToastContainer />
+//     </>
+   
+//   );
+// }
+
+
+
 
 export default App
