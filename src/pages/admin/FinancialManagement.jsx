@@ -46,9 +46,9 @@ const FinancialManagement = () => {
         </div>
         <span className='financePayrollManagementTopper'>Overtime Management</span>
         <div className="financeOvertimeManagement">
-            <div className="financeOvertimeManagementHeader">
+            {/* <div className="financeOvertimeManagementHeader">
                 <button>Add Overtime</button>
-            </div>
+            </div> */}
             <div>
                 <Overtime />
             </div>

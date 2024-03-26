@@ -3,6 +3,8 @@ import { useAddPositionMutation } from "../../../features/positions/positionsApi
 import { useGetEmployeesQuery } from "../../../features/employees/employeesApi";
 import { useGetDepartmentsQuery } from "../../../features/department/departmentApi";
 
+import './JobTitleForm.scss'
+
 const JobTitleForm = () => {
 
   // Job Titles
@@ -80,6 +82,8 @@ const JobTitleForm = () => {
   const handleJobTitleSubmit = async (e) => {
     e.preventDefault();
     if (!Title.trim() || !EmployeeID.trim() || !Salary.trim() || !DepartmentID.trim()) {
+      console.log("This is the job title form data")
+      console.log(jobTitleFormData)
       console.error("All fields are required");
       return;
     }
@@ -100,14 +104,20 @@ const JobTitleForm = () => {
   };
 
   return (
-    <div>
-      <span>Job titles</span>
-      <form onSubmit={handleJobTitleSubmit}>
-        <select value={Title} onChange={handleChange}>
-                    <option value="">Select Job Title</option>
-                    {jobTitles.map((title, index) => (
-                        <option key={index} value={title}>{title}</option>
-                    ))}
+    <div className="JobTitleForm">
+      <span className="JobTitleFormHeader">Add New Job Position</span>
+      <form onSubmit={handleJobTitleSubmit} className="JobTitleFormForms">
+        {/* <select defaultValue={Title} onChange={handleChange}>
+          <option value="">Select Job Title</option>
+            {jobTitles.map((title, index) => (
+          <option key={index} value={title}>{title}</option>
+            ))}
+        </select> */}
+        <select name="Title" id="" onChange={handleChange}>
+          <option value="">Select position...</option>
+          {jobTitles.map((job, i) => (
+            <option value={job} key={i}>{job}</option>
+            ))}
         </select>
         <select
           name="EmployeeID"
@@ -143,7 +153,7 @@ const JobTitleForm = () => {
           </option>))}
         </select>
         <button type="submit" disabled={isJobTitleLoading}>
-          {isJobTitleLoading ? "Adding..." : "Add Job Title"}
+          {isJobTitleLoading ? "Adding..." : "Add Job Position"}
         </button>
         {isJobTitleError && <span>Error adding job title</span>}
       </form>

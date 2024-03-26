@@ -60,9 +60,8 @@ export const employeeApi = createApi({
         providesTags: ["Employee"],
       }),
 
-    // New endpoint: Get employee details including leave, position, and department
     getEmployeeLeavePositionDepartment: builder.query({
-      query: () => "employee/leave/position/department",
+      query: () => `employee/leave/position/department`,
       providesTags: ["Employee"],
     }),
     }),

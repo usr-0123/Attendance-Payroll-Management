@@ -1,0 +1,17 @@
+.financeOvertimeManagementBody{
+    .financeOvertimeManagementBodyHeader {}
+    .financeOvertimeManagementBodyContent {
+        .overtimess {
+            width: 100%;
+            display: flex;
+            background-color: #F1F3FD;
+            padding: 10px 0 10px 0;
+            border-radius: 13px;
+
+            span {
+                display: flex;
+                width: 25%;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.departmentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .departmentFormHeader {
+        font-weight: 1000;
+    }
+
+    .departmentForms {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        input, button {
+            border-radius: 13px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        button {
+            background-color: #0083FF;
+            border-color: #0083FF;
+            color: #fff;
+            font-weight: 1000;
+        }
+    }
+}

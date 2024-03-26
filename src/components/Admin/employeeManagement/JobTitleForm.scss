@@ -1,0 +1,28 @@
+.JobTitleForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .JobTitleFormHeader {
+        font-weight: 1000;
+    }
+
+    .JobTitleFormForms {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        select, input, button {
+            padding: 10px;
+            border-radius: 13px;
+            border: 1px solid black;
+        }
+
+        button {
+            background-color: #0083FF;
+            border-color: #0083FF;
+            color: #fff;
+            font-weight: 1000;
+        }
+    }
+}

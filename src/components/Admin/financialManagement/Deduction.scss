@@ -1,0 +1,26 @@
+.financeOvertimeManagement {
+    .financeOvertimeManagementBody {
+        .financeOvertimeManagementBodyHeader {
+        }
+        .financeOvertimeManagementBodyContent {
+            display: flex;
+            gap: 10px;
+            background-color: #fff;
+
+            .deductionsss {
+                display: flex;
+                width: 100%;
+                background-color: #F1F3FD;
+                padding: 10px 0 10px 0;
+                border-radius: 13px;
+                
+
+                span {
+                    display: flex;
+                    justify-content: space-evenly;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

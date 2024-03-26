@@ -2,31 +2,25 @@ import { useAddPayrollMutation } from "../../../features/payroll/payrollApi";
 
 import React, { useState } from 'react';
 
+import './NewPayrollForm.scss'
+
 const NewPayrollForm = () => {
     return (
         <div className="newPayrollForm">
             <p>Add New Payroll</p>
-            <form>
-                <div>
-                    <label>Job Title:</label>
-                    <input
-                        type="text"
-                    />
+            <form className="newPayrollFormForm">
+                <div className="newPayrollFormFormJob">
+                    <input type="text" placeholder="Enter job title"/>
                 </div>
-                <div>
-                    <label> Department:</label>
-                    <input
-                        type="text"
-                    />
+                <div className="newPayrollFormFormDpt">
+                    <input type="text" placeholder="Enter the department"/>
                 </div>
-                <div>
-                    <label>Gross Salary:</label>
-                    <input
-                        type="number" 
-                    />
+                <div className="newPayrollFormFormSalary">
+                    <input type="number" placeholder="Gross Salary" />
                 </div>
-                <button>Submit
-                </button>
+                <div className="newPayrollFormFormBtn">
+                <button>Submit</button>
+                </div>
             </form>
         </div>
     );

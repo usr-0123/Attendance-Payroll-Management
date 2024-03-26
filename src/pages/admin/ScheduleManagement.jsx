@@ -12,12 +12,26 @@ import {
     useDeleteScheduleMutation,
     useGetAllEmployeesWithSchedulesQuery
 } from '../../features/schedule/scheduleApi';
+import { useFetchAllEmployeeDetailsQuery } from '../../features/employees/employeesApi';
 
 const ScheduleManagement = () => {
 
+  const scheduleNames = [
+    "Morning shift",
+    "Noon Shift",
+    "Evening shift",
+    "Night shift"
+  ]
+
   const { data: allSchedules, isLoading, isError, refetch } = useGetAllEmployeesWithSchedulesQuery();
 
-  console.log("allSchedules", allSchedules);
+  const { data: employees, error, isLoading: isEmployeesLoading } = useFetchAllEmployeeDetailsQuery();
+
+  useEffect(() => {
+    console.log("Employees data:", employees);
+  }, [employees]);
+
+  // console.log("allSchedules", allSchedules);
 
   // Function to fetch all the entries
   useEffect(() => {
@@ -128,23 +142,34 @@ const ScheduleManagement = () => {
         </div>
       </div>
       <div className="addSchedule">
-        <span>New Schedule</span>
-        <input
+        <span>Add a New Schedule</span>
+        <select
           name="EmailAddress"
-          className="addScheduleName"
-          type="email"
-          placeholder="Email Address"
+          className='addScheduleName'
+          id="EmployeeID"
           value={newSchedule.EmailAddress}
           onChange={handleInputChange}
-        />
-        <input
-          name="ScheduleName"
+        >
+          <option value="">Select employee</option>
+          {employees &&
+            employees.map((employee) => (
+              <option key={employee.id} value={employee.id}>
+                {employee.Email_address}
+              </option>
+            ))}
+        </select>
+        <select 
+          name="ScheduleName" 
           className="addScheduleName"
-          type="text"
-          placeholder="Schedule Name"
+          id="ScheduleName"
           value={newSchedule.ScheduleName}
           onChange={handleInputChange}
-        />
+        >
+          <option value="">Select schedule name...</option>
+          {scheduleNames && scheduleNames.map((scheduleName, index) => (
+            <option key={index} value={index}>{scheduleName}</option>
+          ))}
+        </select>
         <input
           name="CheckIn"
           className="addScheduleIn"

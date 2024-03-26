@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useAddDeductionMutation } from '../../../features/deduction/deductionApi';
 
+import './DeductionForm.scss'
+
 const DeductionForm = () => {
     const [formData, setFormData] = useState({
         DeductionName: '',
@@ -41,8 +43,8 @@ const DeductionForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <form onSubmit={handleSubmit} className='DeductionForm'>
+            <div className='DeductionFormName'>
                 <label htmlFor="DeductionName">Deduction Name:</label>
                 <input
                     type="text"
@@ -51,7 +53,7 @@ const DeductionForm = () => {
                     onChange={(e) => setFormData({ ...formData, DeductionName: e.target.value })}
                 />
             </div>
-            <div>
+            <div className='DeductionFormDescription'>
                 <label htmlFor="DeductionDescription">Deduction Description:</label>
                 <input
                     type="text"
@@ -60,7 +62,7 @@ const DeductionForm = () => {
                     onChange={(e) => setFormData({ ...formData, DeductionDescription: e.target.value })}
                 />
             </div>
-            <div>
+            <div className='DeductionFormAmount'>
                 <label htmlFor="Amount">Amount:</label>
                 <input
                     type="number"
@@ -69,7 +71,7 @@ const DeductionForm = () => {
                     onChange={(e) => setFormData({ ...formData, Amount: e.target.value })}
                 />
             </div>
-            <button type="submit">{isLoading ? 'Submitting...' : 'Submit'}</button>
+            <button type="submit" className='DeductionFormButton'>{isLoading ? 'Submitting...' : 'Submit'}</button>
             {isError && <span>Error: Failed to add deduction</span>}
         </form>
     );

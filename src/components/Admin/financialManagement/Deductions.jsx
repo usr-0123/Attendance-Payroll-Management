@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useGetDeductionsQuery } from '../../../features/deduction/deductionApi';
+import './Deduction.scss'
 
 const Deductions = () => {
     const { data: deductions, error, isLoading, refetch } = useGetDeductionsQuery();
@@ -25,13 +26,17 @@ const Deductions = () => {
                     <span></span>
                 </div>
                 <div className='financeOvertimeManagementBodyContent'>
-                    {deductions.map((deduction, index) => (
-                        <div key={index}>
+                    {isLoading ? (
+                        <div>Loading data...</div>
+                    ) : (
+                    deductions.map((deduction, index) => (
+                        <div key={index} className='deductionsss'>
                             <span>{deduction.DeductionName}</span>
                             <span>{deduction.Amount}</span>
-                            <span>{deduction.DeductionDescription}</span>
+                            <span></span>
                         </div>
-                    ))}
+                    ))
+                    )}
                 </div>
             </div>
         </div>

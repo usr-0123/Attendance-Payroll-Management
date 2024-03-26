@@ -1,5 +1,6 @@
 import React from 'react';
 import { useGetPayrollsQuery } from '../../../features/payroll/payrollApi';
+import './Payroll.scss'
 
 const Payroll = () => {
     const { data: payrolls, error, isLoading } = useGetPayrollsQuery();
@@ -18,7 +19,7 @@ const Payroll = () => {
                         <div>Loading...</div>
                     ) : (
                         payrolls.map((payroll, index) => (
-                            <div key={index}>
+                            <div key={index} className='payrrollss'>
                                 <span>{payroll.EmployeeID}</span>
                                 <span>{payroll.DeductionID}</span>
                                 <span>{payroll.GrossPay} $</span>

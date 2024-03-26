@@ -1,0 +1,41 @@
+.newPayrollForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #F1F3FD;
+    padding: 10px;
+    border-radius: 16px;
+    // justify-content: center;
+    align-items: center;
+
+    .newPayrollFormForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+
+        .newPayrollFormFormJob, .newPayrollFormFormDpt, .newPayrollFormFormSalary, .newPayrollFormFormBtn {
+            display: flex;
+            justify-content: center;
+            width:100%;
+            gap: 10px;
+
+            input {
+                width: 70%;
+                border-radius: 13px;
+                padding: 10px;
+                border: none;
+            }
+
+            button {
+                padding: 10px;
+                border-radius: 13px;
+                border: none;
+                background-color: #0083FF;
+                color: #fff;
+                font-weight: 1000;
+            }
+        }
+    }
+}

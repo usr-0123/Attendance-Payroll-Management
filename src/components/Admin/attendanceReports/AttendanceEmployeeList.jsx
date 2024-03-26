@@ -1,39 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import { StyleSheet, Text, View, PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
-
 import { useGetEmployeeLeavePositionDepartmentQuery } from '../../../features/employees/employeesApi';
 
-
 const AttendanceEmployeeList = () => {
-  // State to store the fetched users' data
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  // Fetch data using Redux Toolkit Query hook
-  const { data: employeeData, error: fetchError, isLoading: fetchLoading } = useGetEmployeeLeavePositionDepartmentQuery();
+  const { data}=useGetEmployeeLeavePositionDepartmentQuery()
 
-//   console.log("employeeData", employeeData);
-
-    // Update the state with fetched data
-    useEffect(() => {
-        const fetchData = async () => {
-          setIsLoading(true);
-          try {
-            const response = await fetch(employeeData)
-            setUsers(response.data || []);
-            setIsLoading(false);
-          } catch (error) {
-            setError(error.message || 'An error occurred');
-            setIsLoading(false);
-          }
-        };
-    
-        fetchData();
-      }, [employeeData]);
-
-    //   console.log("employeeData", employeeData);
+  console.log("employee data one",data);
 
 const calculateTimeDifference = (checkIn, checkOut) => {
     const diff = new Date(checkOut) - new Date(checkIn);
@@ -45,15 +19,21 @@ const calculateTimeDifference = (checkIn, checkOut) => {
 };
 
   // Function to generate employees PDF data
-const generateUsersPDF = (employeeData) => {
+const generateUsersPDF = (data) => {
     // Create a PDF document
     const MyDocument = (
       <Document>
         <Page style={styles.page}>
           <View style={styles.section}>
             <Text style={styles.title}>Employees List</Text>
-            {employeeData.map((user, index) => (
-              <Text style={styles.data} key={index}>{`First_ame: ${user.First_name}, Last_name: ${user.Lastr_name}, Email: ${user.Email_address}, Department: ${user.Department}`}</Text>
+            {data && data.map((user, index) => (
+              <Text style={styles.data} key={index}>{
+                `First_ame: ${user.First_name}, 
+                Last_name: ${user.Last_name}, 
+                Email: ${user.Email_address}, 
+                Department: ${user.Department},
+                Attendance: ${calculateTimeDifference(user.CheckIn, user.CheckOut)}`
+                }</Text>
             ))}
           </View>
         </Page>
@@ -68,7 +48,7 @@ const generateUsersPDF = (employeeData) => {
 const styles = StyleSheet.create({
 page: {
   flexDirection: 'row',
-  backgroundColor: 'red',
+  backgroundColor: '#FF',
   padding: 10,
 },
 section: {
@@ -98,7 +78,7 @@ data: {
         <span>Attendance</span>
       </div>
       <ul>
-        {employeeData.map((user, index) => (
+        {data && data.map((user, index) => (
           <li key={index} className='AttendanceReportBottomHList'>
             <span>{user.First_name}</span>
             <span>{user.Last_name}</span>
@@ -108,7 +88,7 @@ data: {
           </li>
         ))}
       </ul>
-      <PDFDownloadLink document={generateUsersPDF(employeeData)} fileName="Employees_department_leave_position.pdf">
+      <PDFDownloadLink document={generateUsersPDF(data)} fileName="Employees_department_leave_position.pdf">
             {({ blob, url, loading, error }) =>
               loading ? 'Downloading...' : 'Download PDF'
             }

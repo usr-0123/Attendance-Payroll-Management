@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAddDepartmentMutation } from "../../../features/department/departmentApi";
+import './DepartmentForm.scss'
 
 const DepartmentForm = () => {
   const [deptFormData, setDeptFormData] = useState({
@@ -32,9 +33,9 @@ const DepartmentForm = () => {
   };
 
   return (
-    <div>
-      <span>Departments</span>
-      <form onSubmit={handleDeptSubmit}>
+    <div className="departmentForm">
+      <span className="departmentFormHeader">Add a new Department</span>
+      <form onSubmit={handleDeptSubmit} className="departmentForms">
         <input
           type="text"
           name="DepartmentName"

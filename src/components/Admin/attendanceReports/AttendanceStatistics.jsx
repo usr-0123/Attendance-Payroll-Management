@@ -12,18 +12,18 @@ const AttendanceStatistics = () => {
     // Query hook to count the number of employees
     const { data: employeesCountData } = useCountEmployeesQuery();
 
-    console.log("employeesCountData", employeesCountData);
-    
-    // Query hook to count the number of leave entries
+    console.log(employeesCountData);
+
     const { data: leaveCountData } = useCountLeaveEntriesQuery();
-    console.log("leaveCountData", leaveCountData);
+
+    console.log(leaveCountData);
 
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const employeesResponse = await employeesCountData.refetch();
-                const leaveResponse = await leaveCountData.refetch();
+                const employeesResponse = await employeesCountData;
+                const leaveResponse = await leaveCountData;
                 
                 const employeeCount = employeesResponse.data?.employeeCount || 0;
                 const leaveCount = leaveResponse.data?.leaveCount || 0;
@@ -41,6 +41,8 @@ const AttendanceStatistics = () => {
         
         fetchData();
     }, [employeesCountData, leaveCountData]);
+
+    console.log(difference);
 
     if (isLoading) {
         return <div>Loading...</div>;

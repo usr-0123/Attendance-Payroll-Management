@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useGetAdvancesQuery } from '../../../features/advance/advanceApi';
+import './Overtime.scss'
 
 const AdvanceCash = () => {
     // Fetch data using the useGetAdvancesQuery hook
@@ -29,7 +30,7 @@ const AdvanceCash = () => {
                         <div>Loading...</div>
                     ) : (
                         advances.map((advance, index) => (
-                            <div key={index}>
+                            <div key={index} className='overtimess'>
                                 <span>{advance.EmployeeID}</span>
                                 <span>{advance.RequestDate}</span>
                                 <span>{advance.Amount}</span>
